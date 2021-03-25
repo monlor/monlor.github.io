@@ -1,0 +1,41 @@
+<h1 id="hexo-generator-searchdb"><a href="#hexo-generator-searchdb" class="headerlink" title="hexo-generator-searchdb"></a>hexo-generator-searchdb</h1><p><a href="https://www.npmjs.com/package/hexo-generator-searchdb" target="_blank" rel="noopener"><img src="https://img.shields.io/npm/v/hexo-generator-searchdb?style=flat-square" alt="npm-image"></a><br><a href="https://nodejs.org/en/download/releases" target="_blank" rel="noopener"><img src="https://img.shields.io/node/v/hexo-generator-searchdb?style=flat-square" alt="node-image"></a><br><a href="https://hexo.io" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/hexo-%3E%3D%203.0-blue?style=flat-square" alt="hexo-image"></a><br><a href="LICENSE"><img src="https://img.shields.io/npm/l/hexo-generator-searchdb?style=flat-square" alt="lic-image"></a></p>
+<p>Seach data generator plugin for Hexo.</p>
+<p>This plugin is used for generating a search index file, which contains all the necessary data of your articles that you can use to write a local search engine for your blog. Supports both XML and JSON format output.</p>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p>![size-image]<br><a href="https://www.npmjs.com/package/hexo-generator-searchdb" target="_blank" rel="noopener"><img src="https://img.shields.io/npm/dm/hexo-generator-searchdb?style=flat-square" alt="dm-image"></a><br><a href="https://www.npmjs.com/package/hexo-generator-searchdb" target="_blank" rel="noopener"><img src="https://img.shields.io/npm/dt/hexo-generator-searchdb?style=flat-square" alt="dt-image"></a></p>
+<pre><code class="bash">$ npm install hexo-generator-searchdb
+</code></pre>
+<h2 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h2><p>You can configure this plugin in your root <code>_config.yml</code>. All the arguments are optional.</p>
+<pre><code class="yaml"><span class="attr">search:</span>
+  <span class="attr">path:</span> <span class="string">search.xml</span>
+  <span class="attr">field:</span> <span class="string">post</span>
+  <span class="attr">content:</span> <span class="literal">true</span>
+  <span class="attr">format:</span> <span class="string">html</span>
+</code></pre>
+<ul>
+<li><strong>path</strong> - file path. By default is <code>search.xml</code>. If the file extension is <code>.json</code>, the output format will be JSON. Otherwise XML format file will be exported.</li>
+<li><strong>field</strong> - the search scope you want to search, you can chose:<ul>
+<li><strong>post</strong> (Default) - will only cover all the posts of your blog.</li>
+<li><strong>page</strong> - will only cover all the pages of your blog.</li>
+<li><strong>all</strong> - will cover all the posts and pages of your blog.</li>
+</ul>
+</li>
+<li><strong>content</strong> - whether contains the whole content of each article. If <code>false</code>, the generated results only cover title and other meta info without mainbody. By default is <code>true</code>.</li>
+<li><strong>format</strong> - the form of the page contents, options are:<ul>
+<li><strong>html</strong> (Default) - original html string being minified.</li>
+<li><strong>striptags</strong> - original html string being minified, and remove all the tags.</li>
+<li><strong>raw</strong> - markdown text of each posts or pages.</li>
+</ul>
+</li>
+</ul>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><h3 id="What’s-this-plugin-supposed-to-do"><a href="#What’s-this-plugin-supposed-to-do" class="headerlink" title="What’s this plugin supposed to do?"></a>What’s this plugin supposed to do?</h3><p>This plugin is used for generating a xml / json file from your Hexo blog that provides data for searching.</p>
+<h3 id="Where’s-this-file-saved-to"><a href="#Where’s-this-file-saved-to" class="headerlink" title="Where’s this file saved to?"></a>Where’s this file saved to?</h3><p>After executing <code>hexo g</code> you will get the generated result at your public folder.</p>
+<h3 id="How-to-use-this-plugin-in-my-Hexo-blog"><a href="#How-to-use-this-plugin-in-my-Hexo-blog" class="headerlink" title="How to use this plugin in my Hexo blog?"></a>How to use this plugin in my Hexo blog?</h3><p>You have two choices:</p>
+<ul>
+<li>you don’t want to write search engine by yourself. There are many themes that take use this plugin for local searching that works out of box.</li>
+<li>you are familiar with fetch API or jQuery Ajax and would like to write your own search engine. You can implement one by yourself according to the theme NexT. Read the <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">source code</a> of this theme. Generally there are 3 steps:<ol>
+<li>write a <a href="https://github.com/theme-next/hexo-theme-next/blob/v7.5.0/layout/_partials/search/localsearch.swig" target="_blank" rel="noopener">search view</a>. This is the place for displaying a search form and search results ;</li>
+<li>write a <a href="https://github.com/theme-next/hexo-theme-next/blob/v7.5.0/source/js/local-search.js" target="_blank" rel="noopener">search script</a>. This script tells the browser how to grab search data and filter out contents what we’re searching;</li>
+<li>tell hexo to <a href="https://github.com/theme-next/hexo-theme-next/blob/v7.5.0/layout/_third-party/search/localsearch.swig" target="_blank" rel="noopener">connect the above two part</a>.</li>
+</ol>
+</li>
+</ul>

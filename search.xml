@@ -1,0 +1,1213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Apple 日历订阅开启节假日显示</title>
+    <url>/posts/7877.html</url>
+    <content><![CDATA[<blockquote>
+<p>注意：暂时只能在 Mac 下添加，IOS 下暂时没有找到可以添加日历订阅的地方，但是在 Mac 添加后 IOS 可以同步更新</p>
+</blockquote>
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>设备：MacBook Pro 13’’ </p>
+<p>系统版本：macOS Big Sur 11.2.2</p>
+<a id="more"></a>
+<h3 id="使用姿势"><a href="#使用姿势" class="headerlink" title="使用姿势"></a>使用姿势</h3><p>打开日历，文件 -&gt; 添加日历订阅</p>
+<p>添加中国节日订阅： <code>https://p22-calendars.icloud.com/published/2/RL1JwQQtKFudYOiicAG_adz9DdrozFeZzv5Uyrs4s3gyWobdzL1NZFH-ZHAsTfuAevtnzdqVdYmcRO_Y_dWtxeIdmzUA1TNkAt5RuotJmsg</code></p>
+<p>添加放假日历订阅： <code>https://p22-calendars.icloud.com/published/2/RL1JwQQtKFudYOiicAG_adz9DdrozFeZzv5Uyrs4s3gyWobdzL1NZFH-ZHAsTfuAevtnzdqVdYmcRO_Y_dWtxeIdmzUA1TNkAt5RuotJmsg</code></p>
+<p>如下图，可以显示出节日，放假时间，以及补休上班时间</p>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/25052144-5b29538bb50dbb16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="公共订阅日历"><a href="#公共订阅日历" class="headerlink" title="公共订阅日历"></a>公共订阅日历</h3><p>以下网站提供了各种类型的公共订阅链接，包括体育运动、电影剧集、演唱会和健身项目等。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3RhbnphLmNv" title="https://www.stanza.co">stanza<i class="fa fa-external-link"></i></span></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>小技巧</category>
+      </categories>
+      <tags>
+        <tag>+ Apple</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小米/红米路由器AC2100开启ssh并安装MIXBOX</title>
+    <url>/posts/19407.html</url>
+    <content><![CDATA[<p><img class="post-images" data-src="https://i1.mifile.cn/f/i/16/chain/miwifiac/miwifi-solid.jpg"></p>
+<p>小米/红米路由器<code>AC2100</code>通过远程<code>telnet</code>漏洞破解开启<code>ssh</code>，可能也适用于其他小米路由器</p>
+<a id="more"></a> 
+<ol>
+<li><p>根据恩山大佬的教程在<code>windows</code>下一键破解开启<code>telnet</code>：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmlnaHQuY29tLmNuL2ZvcnVtL3RocmVhZC00MDE2OTg1LTEtMy5odG1s" title="https://www.right.com.cn/forum/thread-4016985-1-3.html">传送门<i class="fa fa-external-link"></i></span>，<strong>注意需要2根网线，一根网线连接路由器WAN口和任意LAN口，另一根网线将电脑连接到任意LAN口</strong></p>
+</li>
+<li><p><code>telnet</code>成功进入就可以了，<strong>不要继续刷写固件</strong></p>
+</li>
+<li><p>执行以下命令更改<code>root</code>用户密码，输入没有回显，<strong>请牢记这个密码，用于登陆ssh</strong></p>
+<pre class=" language-shell"><code class="language-shell">passwd root
+</code></pre>
+</li>
+<li><p>执行以下3条命令即可成功开启<code>ssh</code></p>
+<pre class=" language-shell"><code class="language-shell">sed -i ":x;N;s/if \[.*\; then\n.*return 0\n.*fi/#tb/;b x" /etc/init.d/dropbear
+/etc/init.d/dropbear start
+nvram set ssh_en=1; nvram commit
+</code></pre>
+</li>
+<li><p>安装<code>MIXBOX</code>，安装命令更新导致许多人安装失败，最新的安装命令以博客和<code>GitHub</code>为准。<a href="https://www.monlor.com/posts/54973.html">传送门</a></p>
+</li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>mixbox</tag>
+        <tag>路由器</tag>
+        <tag>小米</tag>
+        <tag>工具箱</tag>
+        <tag>插件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小米路由器MIXBOX工具箱公测版本发布，支持小米路由器全型号</title>
+    <url>/posts/54973.html</url>
+    <content><![CDATA[<p><img class="post-images" data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw1vptov7j20rn0izgr3.jpg"></p>
+<p>MIXBOX是一款全新的，完全基于Shell脚本的工具箱，为在路由器上实现程序的快速配置及运行管理，欢迎大佬们stars、fork及pr.</p>
+<p><img data-src="https://github.com/monlor/MIXBOX/workflows/Main-CI/badge.svg" alt=""></p>
+<a id="more"></a> 
+<ul>
+<li>Telegram群：<span class="exturl" data-url="aHR0cHM6Ly90Lm1lL21peGJveGNoYXQ=" title="https://t.me/mixboxchat">MIXBOX CHAT<i class="fa fa-external-link"></i></span></li>
+<li>我的博客：<a href="https://www.monlor.com">Monlor’s Blog</a>, <span class="exturl" data-url="aHR0cHM6Ly9tb25sb3IuZ2l0aHViLmlv" title="https://monlor.github.io">备用地址<i class="fa fa-external-link"></i></span></li>
+<li>GitHub地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vbmxvci9NSVhCT1g=" title="https://github.com/monlor/MIXBOX">monlor/MIXBOX<i class="fa fa-external-link"></i></span></li>
+</ul>
+<hr>
+<h3 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vbmxvci9NSVhCT1gvYmxvYi9tYXN0ZXIvY2hhbmdlbG9nLm1k" title="https://github.com/monlor/MIXBOX/blob/master/changelog.md">更新日志<i class="fa fa-external-link"></i></span></h3><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p><strong>工具箱<code>MIXBOX</code>公测发布，<code>Monlor Tools</code>不再更新。新版本有以下改变：</strong></p>
+<ul>
+<li>MIXBOX<ul>
+<li>工具箱尝试支持更多的路由器固件，正在努力中，需要测试</li>
+<li>去掉随时可能被小米封的web界面</li>
+<li>移除针对小米路由器设置的功能，如修改samba路径和禁用迅雷等，合并到新的插件<code>MIWIFI</code></li>
+<li>增加一个应急功能，在用户目录创建文件<code>uninstall_mixbox</code>即可卸载工具箱</li>
+<li>增加几个工具箱常用命令，<code>applist</code>:用于管理插件列表，<code>cru</code>:定时任务管理，<code>mbdb</code>:工具箱数据库，基于uci，<code>mixbox</code>:工具箱命令行交互界面</li>
+<li>工具箱增加目录，<code>/etc/mixbox/mbdb</code>:存放数据文件，<code>/etc/mixbox/var/run</code>:存在程序进程pid文件，<code>/etc/mixbox/var/log</code>:工具箱日志目录</li>
+<li>工具箱现在不会特意去兼容某个型号，比如<code>R3</code>上的<code>Aria2</code>问题，只考虑<code>CPU</code>架构，<code>mips</code>/<code>arm</code>等，所以如果<code>R3</code>/<code>R1CM</code>发现程序不兼容的情况，可以选择自己替换程序，或同时安装<code>Monlor-Tools</code>工具箱</li>
+<li>插件安装去掉了离线安装的功能，后续会加入进来，给用户提供一个自己修改打包插件的机会</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>ShadowSocks<ul>
+<li>订阅现在会多次尝试，如已安装<code>EntWare</code>中的<code>curl</code>程序会自动调用用作订阅</li>
+<li>现已支持<code>v2ray</code>并测试黑白名单和全局模式，正常使用，v2ray订阅暂不支持</li>
+<li>已支持<code>kcptun</code>加速功能，<code>ss</code>和<code>kcp</code>需为同一个服务器，否则不启用</li>
+<li>优化添加<code>ss</code>节点时的提示信息</li>
+<li>增加<code>haveged</code>程序，用于生成随机数</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>KoolProxy<ul>
+<li>由于作者更新程序修改了视频模式的启用方式，更新了启动脚本</li>
+<li><code>https</code>证书生成不再使用<code>openssl</code>程序，而使用<code>kp</code>自带程序生成</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>新增插件<ul>
+<li>AliDDNS：获取当前网络的ip，自动解析到阿里云</li>
+<li>BaiduPCS：第三方百度网盘下载工具，带web界面</li>
+<li>DropBear：移植小米路由器的<code>SSH</code>功能到工具箱</li>
+<li>Frps：快速搭建<code>frp</code>服务端</li>
+<li>PPTPD：快速搭建<code>vpn</code>服务器，基于<code>EntWare</code>环境</li>
+<li>SmartDNS：智能<code>dns</code>解析，从多个上游<code>dns</code>服务器中选取最快的解析地址</li>
+<li>SSServer：搭建<code>ss</code>服务器</li>
+<li>Transmission：强大的<code>pt</code>下载工具，基于<code>EntWare</code>环境</li>
+<li>WebD：极其小巧的网盘工具，功能比较简单</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>其他等等等小更新…</li>
+</ul>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>用户目录是指存放一下大文件的目录，如下载的文件等</li>
+<li><strong>经测试<code>R3</code>不支持<code>EntWare</code>环境，原因未知，所以基于<code>EntWare</code>的程序都无法使用</strong></li>
+<li><strong>0.1.9.7以前的版本请手动更换下载源</strong>，步骤：mixbox =&gt; 工具箱管理 =&gt; 更换下载源 =&gt; 输入以下地址<pre><code>https://cdn.jsdelivr.net/gh/monlor/mbfiles
+</code></pre></li>
+<li>默认源更换为jsdelivr源，coding源不再使用</li>
+</ul>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><h4 id="一键安装"><a href="#一键安装" class="headerlink" title="一键安装"></a>一键安装</h4><pre class=" language-shell"><code class="language-shell">sh -c "$(curl -kfsSl https://cdn.jsdelivr.net/gh/monlor/mbfiles/install.sh)" && source /etc/profile &> /dev/null
+</code></pre>
+<h4 id="github源一键安装命令"><a href="#github源一键安装命令" class="headerlink" title="github源一键安装命令"></a>github源一键安装命令</h4><pre class=" language-shell"><code class="language-shell">sh -c "$(curl -kfsSl https://raw.githubusercontent.com/monlor/mbfiles/master/install_github.sh)" && source /etc/profile &> /dev/null
+</code></pre>
+<h4 id="ghcdn源一键安装命令"><a href="#ghcdn源一键安装命令" class="headerlink" title="ghcdn源一键安装命令"></a>ghcdn源一键安装命令</h4><pre class=" language-shell"><code class="language-shell">sh -c "$(curl -kfsSl https://cdn.jsdelivr.net/gh/monlor/mbfiles/install_ghcdn.sh)" && source /etc/profile &> /dev/null
+</code></pre>
+<h3 id="手动更新命令"><a href="#手动更新命令" class="headerlink" title="手动更新命令"></a>手动更新命令</h3><pre class=" language-shell"><code class="language-shell">sh -c "$(curl -kfsSl https://cdn.jsdelivr.net/gh/monlor/mbfiles/update.sh)" && source /etc/profile &> /dev/null
+</code></pre>
+<h3 id="手动卸载命令"><a href="#手动卸载命令" class="headerlink" title="手动卸载命令"></a>手动卸载命令</h3><pre class=" language-shell"><code class="language-shell">sh -c "$(curl -kfsSl https://cdn.jsdelivr.net/gh/monlor/MIXBOX/apps/mixbox/scripts/uninstall.sh)" && source /etc/profile &> /dev/null
+</code></pre>
+<h4 id="一键更新所有插件（请先更新工具箱）"><a href="#一键更新所有插件（请先更新工具箱）" class="headerlink" title="一键更新所有插件（请先更新工具箱）"></a>一键更新所有插件（请先更新工具箱）</h4><pre class=" language-shell"><code class="language-shell">applist installed -n | while read line; do mixbox upgrade $line; done
+</code></pre>
+<h4 id="查看插件常用命令（appname为插件名）"><a href="#查看插件常用命令（appname为插件名）" class="headerlink" title="查看插件常用命令（appname为插件名）"></a>查看插件常用命令（appname为插件名）</h4><pre class=" language-shell"><code class="language-shell">mixbox help
+</code></pre>
+<h3 id="小米路由器目录结构"><a href="#小米路由器目录结构" class="headerlink" title="小米路由器目录结构"></a>小米路由器目录结构</h3><pre><code>/
+|--- /etc/mixbox
+|    |--- /apps/        --- 插件安装目录
+|    |--- /config/      --- 工具箱配置文件目录
+|    |--- /scripts/     --- 工具箱脚本目录
+|    |--- /mbdb/        --- 工具箱数据文件目录
+|  |--- /var/   --- 工具箱运行pid及日志存放目录
+|--- /tmp
+|    |--- /messages     --- 系统日志，工具箱日志
+|--- /userdisk
+|    |--- /data/        --- 硬盘目录
+|--- /extdisks/
+|    |--- /sd*/         --- 外接盘目录
+</code></pre><h3 id="插件列表"><a href="#插件列表" class="headerlink" title="插件列表"></a>插件列表</h3><blockquote>
+<p>感谢以下插件列表中的作者给我们带来的这么好用的程序！<code>作者链接待完善</code></p>
+</blockquote>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NoYWRvd3NvY2tzL3NoYWRvd3NvY2tzL3RyZWUvbWFzdGVy" title="https://github.com/shadowsocks/shadowsocks/tree/master">ShadowSocks<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2tvb2xzaGFyZS5iMC51cGFpeXVuLmNvbS8=" title="http://koolshare.b0.upaiyun.com/">KoolProxy<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2FyaWEyLmdpdGh1Yi5pby8=" title="http://aria2.github.io/">Aria2<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zZWN1cml0eS5hcHBzcG90LmNvbS92c2Z0cGQuaHRtbA==" title="https://security.appspot.com/vsftpd.html">VsFtpd<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1dpbmQ0L3ZsbWNzZA==" title="https://github.com/Wind4/vlmcsd">kms<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhdGVkaWVyL2ZycA==" title="https://github.com/fatedier/frp">Frpc<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Rvc2dvL25ncm9rLWM=" title="https://github.com/dosgo/ngrok-c">Ngrok<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NoZWxsaW5hYm94L3NoZWxsaW5hYm94" title="https://github.com/shellinabox/shellinabox">WebShell<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Rpbnlwcm94eS90aW55cHJveHk=" title="https://github.com/tinyproxy/tinyproxy">TinyProxy<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0VudHdhcmUvRW50d2FyZS1uZw==" title="https://github.com/Entware/Entware-ng">Entware<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9rb2RjbG91ZC5jb20v" title="https://kodcloud.com/">KodExplorer<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2tvb2xzaGFyZS5jbi90aHJlYWQtMTI5MTk5LTEtMS5odG1s" title="http://koolshare.cn/thread-129199-1-1.html">EasyExplorer<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL25naW54Lm9yZy8=" title="http://nginx.org/">HttpFile<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3ZlcnlzeW5jLmNvbS8=" title="http://verysync.com/">VerySync<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZmZm9uaW9uL1h1bmxlaS1GYXN0ZGljaw==" title="https://github.com/fffonion/Xunlei-Fastdick">FastDick<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cubmV0ZmlsdGVyLm9yZy8=" title="https://www.netfilter.org/">FireWall<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2Jsb2cubGFueXVzLmNvbS9hcmNoaXZlcy8xNzQuaHRtbA==" title="http://blog.lanyus.com/archives/174.html">JetBrains<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2tvb2xzaGFyZS5jbi90aHJlYWQtMTI3NzgzLTEtMS5odG1s" title="http://koolshare.cn/thread-127783-1-1.html">QianDao<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZpbGVicm93c2VyL2ZpbGVicm93c2Vy" title="https://github.com/filebrowser/filebrowser">FileBrowser<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemVyb3RpZXIuY29t" title="https://www.zerotier.com">ZeroTier<i class="fa fa-external-link"></i></span></li>
+<li>MIWIFI</li>
+<li>[AliDDNS]</li>
+<li>[BaiduPCS]</li>
+<li>[DropBear]</li>
+<li>[Frps]</li>
+<li>[PPTPD]</li>
+<li>[SmartDNS]</li>
+<li>[SSServer]</li>
+<li>[Transmission]</li>
+<li>[WebD]</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RzbDA5MjIvdHR5ZA==" title="https://github.com/tsl0922/ttyd">ttyd<i class="fa fa-external-link"></i></span></li>
+</ol>
+<h3 id="快速制作插件"><a href="#快速制作插件" class="headerlink" title="快速制作插件"></a>快速制作插件</h3><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ul>
+<li><code>git clone https://github.com/monlor/MIXBOX.git</code></li>
+<li><code>cd MIXBOX/</code></li>
+<li><code>chmod +x ./tools/*.sh</code></li>
+<li><code>./tools/newapp.sh [插件名] [插件服务名] [插件介绍]</code></li>
+<li>修改插件脚本和配置文件</li>
+<li><code>./tools/gitsync.sh pack [插件名] [-v]</code></li>
+</ul>
+<h4 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
+<li>插件名必须为小写，插件服务名一般为驼峰的写法</li>
+<li>插件二进制名称建议与插件名对应，二进制名不能出现下划线，建议用横杠，如obfs-local</li>
+<li>执行完插件生成脚本后，插件会生成在apps中，注意名称不能与现有插件重复</li>
+</ul>
+<h3 id="Ending…"><a href="#Ending…" class="headerlink" title="Ending…"></a>Ending…</h3><p>文中如果有错误的地方，欢迎评论与指正。如果你喜欢我写的文章，也可以点击下方的<code>打赏</code>支持一下，你的支持就是我更新的动力！谢谢大家🙏！</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>开发</category>
+      </categories>
+      <tags>
+        <tag>mixbox</tag>
+        <tag>路由器</tag>
+        <tag>小米</tag>
+        <tag>工具箱</tag>
+        <tag>插件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[转载]DIY你自己的 Arch Linux 软路由</title>
+    <url>/posts/41757.html</url>
+    <content><![CDATA[<p><img class="post-images" data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw26p781dj20go05jt8q.jpg"></p>
+<p>大部分人玩软路由都采用ESXI这款虚拟机系统，准备好16G大内存，搞个黑群辉，然后挂个Lean大的OpenWrt-x86等等。 但是本人对虚拟机并无任何好感，主要是觉得浪费硬件资源，然后配置起来受到一些局限，因此就想到干脆直接装个Linux做路由器。 当然，是装最好用的发行版—Arch Linux.</p>
+<a id="more"></a> 
+<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>本文适合Arch Linux教徒阅读，其他发行版可以参考</p>
+<h3 id="安装Arch-Linux到你的软路由"><a href="#安装Arch-Linux到你的软路由" class="headerlink" title="安装Arch Linux到你的软路由"></a>安装Arch Linux到你的软路由</h3><p>请参考 <span class="exturl" data-url="aHR0cHM6Ly93aWtpLmFyY2hsaW51eC5vcmcvaW5kZXgucGhwL0luc3RhbGxhdGlvbl9ndWlkZQ==" title="https://wiki.archlinux.org/index.php/Installation_guide">Arch Wiki/Installation_guide<i class="fa fa-external-link"></i></span>, 本文不再赘述。</p>
+<h3 id="配置网卡"><a href="#配置网卡" class="headerlink" title="配置网卡"></a>配置网卡</h3><p><strong>p.s.安装完成后别忙退出chroot环境</strong></p>
+<h4 id="配置udev规则，对网卡进行重命名"><a href="#配置udev规则，对网卡进行重命名" class="headerlink" title="配置udev规则，对网卡进行重命名"></a>配置udev规则，对网卡进行重命名</h4><p>创建 <code>/etc/udev/rules.d/10-network.rules</code>， 内容大致如下：</p>
+<pre><code>SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="00:11:22:33:44:55", NAME="net0"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="11:22:33:44:55:66", NAME="net1"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="22:33:44:55:66:77", NAME="net2"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="33:44:55:66:77:88", NAME="net3"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="44:55:66:77:88:99", NAME="wifi0"
+</code></pre><p>其中<code>ATTR{address}</code>是网卡的mac地址，可以用命令<code>ip a</code>查看，<code>NAME</code>是重命名后的名字。</p>
+<p><strong>p.s.请勿使用ethX和wlanX这类的名字，因为内核命名网卡采用的是这些名字，这将导致命名网卡的时候出现竞争冒险</strong></p>
+<p><strong>这里我们做个约定：net0作为路由器的WAN口连接外网，剩余的接口我们桥接成LAN口br0，下面马上会讲到。</strong></p>
+<h4 id="配置netctl"><a href="#配置netctl" class="headerlink" title="配置netctl"></a>配置netctl</h4><h5 id="配置WAN口"><a href="#配置WAN口" class="headerlink" title="配置WAN口"></a>配置WAN口</h5><p>如果WAN侧使用的是DHCP自动获取ip，那么创建一个配置文件<code>/etc/netctl/net0-dhcp-profile</code>，内容如下:</p>
+<pre><code>Description='WAN Interface.'
+Interface=net0
+Connection=ethernet
+IP='dhcp'
+#DNS=('127.0.0.1')
+#DHCPClient=dhcpcd
+#DHCPReleaseOnStop=no
+## for DHCPv6
+#IP6=dhcp
+#DHCP6Client=dhclient
+## for IPv6 autoconfiguration
+#IP6=stateless
+</code></pre><p>根据需要可以设置DNS，ipv6等。</p>
+<p><strong>设置完后执行netctl enable net0-dhcp-profile来启用配置，如果配置文件发生了变化，需要执行netctl reenable net0-dhcp-profile来生效</strong></p>
+<p>如果WAN口采用PPPoE拨号上网的方式，<code>pacman -S rp-pppoe</code>来安装拨号插件<code>rp-pppoe</code>, 创建配置文件<code>/etc/netctl/net0-pppoe-profile</code>，如下：</p>
+<pre><code>Description='WAN PPPoE connection'
+Interface=net0
+Connection=pppoe
+User='user@server'
+Password='your-password-here'
+
+# Always keep a connection established
+ConnectionMode='persist'
+# Establish connection on demand
+#ConnectionMode='demand'
+#IdleTimeout=300
+
+# Use default route provided by the peer (default: true)
+#DefaultRoute=true
+# Use DNS provided by the peer (default: true)
+#UsePeerDNS=false
+
+# Override default LCP parameters from /etc/ppp/options
+#LCPEchoInterval=15
+#LCPEchoFailure=10
+
+# PPPoE options - experts only
+#
+# PPPoE service name
+#PPPoEService=''
+# PPPoE access concentrator name
+#PPPoEAC=''
+# Attach to existing session (sessid:macaddr)
+#PPPoESession=''
+# Only connect to specified MAC address
+#PPPoEMAC=''
+# Enable IPv6 support
+#PPPoEIP6=yes
+</code></pre><p>如果不想用运营商DNS，则取消注释<code>UsePeerDNS=false</code>一行，然后另需设置DNS（使用netctl的hooks），后面也会讲到。</p>
+<p><strong>p.s.配置好后也需要netctl enable,请注意，下面不再提醒。</strong></p>
+<h5 id="配置LAN口"><a href="#配置LAN口" class="headerlink" title="配置LAN口"></a>配置LAN口</h5><p>因为我的路由器一共有4个有线网卡，WAN口用掉了一个，现在还剩下3个，所以全部把他们桥接成<code>br0</code>作为LAN口。</p>
+<p>创建配置文件<code>/etc/netctl/br0-profile</code>，内容如下</p>
+<pre><code>Description="LAN Bridge connection"
+Interface=br0
+Priority=2
+Connection=bridge
+BindsToInterfaces=(net1 net2 net3)
+IP='static'
+Address=('192.168.123.1/24')
+## Ignore (R)STP and immediately activate the bridge
+#SkipForwardingDelay=yes
+</code></pre><p>这里我们吧<code>net1</code> <code>net2</code> <code>net3</code>桥接在一起形成br0这个新的接口，并指定了使用静态ip：<code>192.168.123.1</code> 掩码是24, 也就是说LAN侧这个网络的ip范围是 <code>192.168.123.1-192.168.123.255</code></p>
+<h3 id="配置dnsmasq"><a href="#配置dnsmasq" class="headerlink" title="配置dnsmasq"></a>配置dnsmasq</h3><p>安装dnsmasq：<code>pacman -S dnsmasq</code>, 启用dnsmasq： <code>systemctl enable dnsmasq</code></p>
+<p>修改<code>/etc/dnsmasq.conf</code></p>
+<pre><code>no-poll
+server=202.141.162.123#5353
+interface=br0
+expand-hosts
+domain=ezpro.lan
+dhcp-range=192.168.123.2,192.168.123.255,255.255.255.0,12h
+dhcp-host=aa:bb:cc:dd:ee:ff,192.168.123.52
+conf-dir=/etc/dnsmasq.d/,*.conf
+</code></pre><ul>
+<li><code>no-poll</code>禁止dnsmasq阅读<code>/etc/resolv.conf</code>作为上游DNS，(后面我们把<code>/etc/resolv.conf</code>设置为<code>127.0.0.1</code>即路由器本机的dns通过本机53号端口即dnsmasq来查询)</li>
+<li><code>server</code>dnsmasq的上游dns,这里推荐使用中科大LUG的DNS，用非常规端口5353进行查询，防止运营商劫持</li>
+<li><code>interface</code>指向了我们的lan侧接口<code>br0</code></li>
+<li><code>expand-hosts</code>是给dns记录里面添加<code>/etc/hosts</code>里面的记录</li>
+<li><code>domain</code>是给lan侧设备加上lan侧域名，比如局域网内有一台计算机的hostname叫<code>computer1</code>，那么他的域名就是<code>computer1.ezpro.lan</code></li>
+<li><code>dhcp-range</code>指明了lan侧dhcp服务器发放的ip地址范围和有效期，这里是<code>192.168.123.2-192.168.123.255</code>，有效期是12小时</li>
+<li><code>dhcp-host</code>这里是指定给mac地址为<code>aa:bb:cc:dd:ee:ff</code>的设备分配一个指定的ip<code>192.168.123.52</code></li>
+<li><code>conf-dir</code> 是设置额外配置文件所在的路径，后面<code>archss</code>有用</li>
+</ul>
+<h3 id="开启SSH"><a href="#开启SSH" class="headerlink" title="开启SSH"></a>开启SSH</h3><p>安装openssh：<code>pacman -S openssh</code>，启用sshd服务：<code>systemctl enable sshd</code></p>
+<p>由于sshd默认不允许root登录，后面我们要使用AUR安装一些软件，也是需要一个普通用户，所以请建一个普通用户，并设置好密码，因为sshd默认也不允许空密码登录。</p>
+<p><strong>至此你可以退出chroot环境，重启进入装好的arch linux，将你电脑与路由器LAN侧网线连接，电脑将自动获取到IP, 通过ssh登录到路由器上， 这时候你电脑还没有网络，但路由器有网，因为接下来我们要配置网络转发，实现路由功能</strong></p>
+<h3 id="配置网络转发"><a href="#配置网络转发" class="headerlink" title="配置网络转发"></a>配置网络转发</h3><h4 id="开启内核转发功能"><a href="#开启内核转发功能" class="headerlink" title="开启内核转发功能"></a>开启内核转发功能</h4><p>创建<code>/etc/sysctl.d/30-ipforward.conf</code>，内容如下：</p>
+<pre><code>net.ipv4.ip_forward = 1
+net.ipv6.config.default.forwarding = 1
+net.ipv6.config.all.forwarding = 1
+</code></pre><p>重启生效</p>
+<h4 id="使用AUR（老Archer直接跳过）"><a href="#使用AUR（老Archer直接跳过）" class="headerlink" title="使用AUR（老Archer直接跳过）"></a>使用AUR（老Archer直接跳过）</h4><p>添加<span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLnR1bmEudHNpbmdodWEuZWR1LmNuL2hlbHAvYXJjaGxpbnV4Y24v" title="https://mirrors.tuna.tsinghua.edu.cn/help/archlinuxcn/">archlinuxcn<i class="fa fa-external-link"></i></span>源</p>
+<p>安装aurman：<code>pacman -S aurman</code></p>
+<h4 id="安装支持FULL-CONE-NAT的iptables"><a href="#安装支持FULL-CONE-NAT的iptables" class="headerlink" title="安装支持FULL-CONE-NAT的iptables"></a>安装支持FULL-CONE-NAT的iptables</h4><p>因为内核模块编译需要用到内核头文件，因此先安装<code>linux-headers</code></p>
+<p>然后直接从AUR安装iptables-fullcone-nat：<code>aurman -S iptables-fullcone-nat</code></p>
+<p>此项目来源自Chion82的<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0NoaW9uODIvbmV0ZmlsdGVyLWZ1bGwtY29uZS1uYXQ=" title="https://github.com/Chion82/netfilter-full-cone-nat">netfilter-full-cone-nat<i class="fa fa-external-link"></i></span></p>
+<h4 id="创建iptables规则"><a href="#创建iptables规则" class="headerlink" title="创建iptables规则"></a>创建iptables规则</h4><p>创建<code>/etc/iptables/dhcp.rules</code>,内容如下：</p>
+<pre><code>*nat
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING -o net0 -j FULLCONENAT
+-A PREROUTING -i net0 -j FULLCONENAT
+COMMIT
+
+
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -i br0 -o net0 -j ACCEPT
+COMMIT
+</code></pre><p>创建<code>/etc/iptables/pppoe.rules</code>,内容如下：</p>
+<pre><code>*nat
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING -o ppp0 -j FULLCONENAT
+-A PREROUTING -i ppp0 -j FULLCONENAT
+COMMIT
+
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -i br0 -o ppp0 -j ACCEPT
+COMMIT
+
+*mangle
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+-A FORWARD -o ppp0 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+COMMIT
+</code></pre><h4 id="创建net0的钩子"><a href="#创建net0的钩子" class="headerlink" title="创建net0的钩子"></a>创建net0的钩子</h4><p>创建脚本<code>/etc/netctl/interfaces/net0</code>，赋予可执行权限，内容如下：</p>
+<pre><code>#!/bin/sh
+
+if [ "$(netctl is-enabled net0-pppoe-profile)" = "enabled" ]; then
+    # Set Custom DNS
+    cat &lt;&lt; EOF &gt; /etc/resolv.conf
+# generated by $0
+nameserver 127.0.0.1
+EOF
+
+    # Start iptables for pppoe
+    iptables-restore /etc/iptables/pppoe.rules
+
+else
+    # Start dhcpiptables
+    iptables-restore /etc/iptables/dhcp.rules
+fi
+</code></pre><p><strong>p.s.这里针对了PPPoE进行设置自定义DNS服务器为127.0.0.1（即本地DNS，由dnsmasq提供），对应net0-pppoe-profile的UsePeerDNS=false选项</strong></p>
+<p>然后<code>netctl restart xxxx-profile</code>重启一下WAN口，会自动执行脚本 <code>/etc/netctl/interfaces/net0</code> 完成相应的iptables转发设置。</p>
+<p><strong>至此，LAN侧设备已经能访问Internet了，基本路由功能已经实现</strong></p>
+<h3 id="开启无线AP-可选"><a href="#开启无线AP-可选" class="headerlink" title="开启无线AP(可选)"></a>开启无线AP(可选)</h3><p>推荐使用QCA9880这卡，本文以QCA9880为例，但是别买成V1版，要买Openwrt-x86兼容的V2，当然其他卡应该也行，不过值得注意的是Intel的网卡都不能开5G的AP</p>
+<p><strong>当然hostapd这种方式开出来的AP效果和网卡以及网卡驱动还是有很大关系的，你也可以选择另外单独买一个无线路由器连到LAN侧作AP使用</strong></p>
+<h4 id="重新编译内核"><a href="#重新编译内核" class="headerlink" title="重新编译内核"></a>重新编译内核</h4><p>开启以下选项以支持更多频道（以<code>ath10k</code>为例）：</p>
+<pre><code>CONFIG_CFG80211_CERTIFICATION_ONUS=y
+CONFIG_ATH_REG_DYNAMIC_USER_REG_HINTS=y
+CONFIG_ATH_REG_DYNAMIC_USER_CERT_TESTING=y
+CONFIG_ATH10K_DFS_CERTIFIED=y
+</code></pre><p>重新编译一个基于arch官方内核的自定义内核，推荐的方式是<span class="exturl" data-url="aHR0cHM6Ly93aWtpLmFyY2hsaW51eC5vcmcvaW5kZXgucGhwL0tlcm5lbHMvQXJjaF9CdWlsZF9TeXN0ZW0=" title="https://wiki.archlinux.org/index.php/Kernels/Arch_Build_System">Arch Wiki/Kernels/Arch_Build_System<i class="fa fa-external-link"></i></span> 编译好后用<code>pacman -U linux-xxx.pkg.tar.xz</code>来安装你的自定义内核，并执行<code>grub2-mkconfig -o /boot/grub/grub.cfg</code>来更新引导菜单</p>
+<h4 id="配置hostapd"><a href="#配置hostapd" class="headerlink" title="配置hostapd"></a>配置hostapd</h4><p>安装hostapd和crda：<code>pacman -S hostapd crda</code></p>
+<p>创建<code>/etc/hostapd/hostapd.conf</code>，内容如下：</p>
+<pre><code>#### Interface configuration ####
+
+interface=wifi0
+bridge=br0
+driver=nl80211
+
+##### IEEE 802.11 related configuration #####
+
+ssid=iCanHearYouHavingSex
+hw_mode=a
+channel=0
+auth_algs=1
+country_code=CN
+ieee80211d=1
+ieee80211h=1
+
+##### IEEE 802.11n related configuration #####
+
+ieee80211n=1
+ht_capab=[HT40+][SMPS-STATIC][SHORT-GI-40][TX-STBC][RX-STBC1][DSSS_CK-40][LDPC][MAX-AMSDU-7935]
+
+##### IEEE 802.11ac related configuration #####
+
+ieee80211ac=1
+vht_capab=[MAX-MPDU-11454][RXLDPC][SHORT-GI-80][TX-STBC-2BY1][RX-STBC-1][MAX-A-MPDU-LEN-EXP7][TX-ANTENNA-PATTERN][RX-ANTENNA-PATTERN][BF-ANTENNA-3][SOUNDING-DIMENSION-3]
+vht_oper_chwidth=1
+
+
+##### WPA/IEEE 802.11i configuration #####
+
+wpa=2
+wpa_key_mgmt=WPA-PSK
+rsn_pairwise=CCMP
+wpa_passphrase=youCanGuess
+
+### WMM
+wmm_enabled=1
+uapsd_advertisement_enabled=1
+wmm_ac_bk_cwmin=4
+wmm_ac_bk_cwmax=10
+wmm_ac_bk_aifs=7
+wmm_ac_bk_txop_limit=0
+wmm_ac_bk_acm=0
+wmm_ac_be_aifs=3
+wmm_ac_be_cwmin=4
+wmm_ac_be_cwmax=10
+wmm_ac_be_txop_limit=0
+wmm_ac_be_acm=0
+wmm_ac_vi_aifs=2
+wmm_ac_vi_cwmin=3
+wmm_ac_vi_cwmax=4
+wmm_ac_vi_txop_limit=94
+wmm_ac_vi_acm=0
+wmm_ac_vo_aifs=2
+wmm_ac_vo_cwmin=2
+wmm_ac_vo_cwmax=3
+wmm_ac_vo_txop_limit=47
+wmm_ac_vo_acm=0
+
+### TX queue parameters
+tx_queue_data3_aifs=7
+tx_queue_data3_cwmin=15
+tx_queue_data3_cwmax=1023
+tx_queue_data3_burst=0
+tx_queue_data2_aifs=3
+tx_queue_data2_cwmin=15
+tx_queue_data2_cwmax=63
+tx_queue_data2_burst=0
+tx_queue_data1_aifs=1
+tx_queue_data1_cwmin=7
+tx_queue_data1_cwmax=15
+tx_queue_data1_burst=3.0
+tx_queue_data0_aifs=1
+tx_queue_data0_cwmin=3
+tx_queue_data0_cwmax=7
+tx_queue_data0_burst=1.5
+</code></pre><ul>
+<li><code>ssid</code>为wifi名称</li>
+<li><code>wpa_passphrase</code> 为wifi密码</li>
+</ul>
+<p>启用hostapd：<code>systemctl enable hostapd</code>，启动hostapd：<code>systemctl start hostapd</code></p>
+<p><strong>p.s.其他网卡请务必留意ht_capab、vht_capab，请通过iw list查看网卡支持的工作模式，填写支持的模式，否则无法启动，所有的选项可以通过hostapd官方完整配置文件/usr/share/doc/hostapd/hostapd.conf进行查看</strong></p>
+<h3 id="额外功能"><a href="#额外功能" class="headerlink" title="额外功能"></a>额外功能</h3><ul>
+<li>samba文件服务器参考<span class="exturl" data-url="aHR0cHM6Ly93aWtpLmFyY2hsaW51eC5vcmcvaW5kZXgucGhwL3NhbWJh" title="https://wiki.archlinux.org/index.php/samba">Arch Wiki/samba<i class="fa fa-external-link"></i></span></li>
+<li>archss透明代理，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vbmxvci9BcmNoLVJvdXRlci1TUw==" title="https://github.com/monlor/Arch-Router-SS">Arch-Router-SS<i class="fa fa-external-link"></i></span></li>
+<li>其他路由设置，参考<span class="exturl" data-url="aHR0cHM6Ly93aWtpLmFyY2hsaW51eC5vcmcvaW5kZXgucGhwL3JvdXRlcg==" title="https://wiki.archlinux.org/index.php/router">Arch Wiki/router<i class="fa fa-external-link"></i></span> <strong>p.s.如果使用iptables-fullcone-nat将不再需要UPnP</strong></li>
+<li>其他额外功能，还是参考<span class="exturl" data-url="aHR0cHM6Ly93aWtpLmFyY2hsaW51eC5vcmcv" title="https://wiki.archlinux.org/">Arch Wiki<i class="fa fa-external-link"></i></span></li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>比起虚拟机开那么多吃爆内存来说，Arch Router只占用了不到270Mb内存，处理器也工作在十分空闲的状态，而且Linux本身就能搭建各种服务器，总的来说可玩性要比虚拟机更高，而且折腾了这一路，也弄清楚了路由器工作的原理，学到很多东西。 还是那句话：</p>
+<blockquote>
+<p>当你成功安装Arch Linux的那一刻，你就已经成为教徒。</p>
+</blockquote>
+<blockquote>
+<p><strong>本文转自<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmVkd2FyZC1wLnh5ei8=" title="https://blog.edward-p.xyz/">Edward-P’s Blog<i class="fa fa-external-link"></i></span>的<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmVkd2FyZC1wLnh5ei8yMDE4LzA4L2FyY2gtcm91dGVyLw==" title="https://blog.edward-p.xyz/2018/08/arch-router/">DIY你自己的 Arch Linux 软路由<i class="fa fa-external-link"></i></span></strong></p>
+</blockquote>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>arch</tag>
+        <tag>linux</tag>
+        <tag>router</tag>
+        <tag>iptables</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOS 7下Oracle 12c数据库安装教程</title>
+    <url>/posts/9565.html</url>
+    <content><![CDATA[<p><img class="post-images" data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw25hno8tj20nc09qq35.jpg"></p>
+<p><code>Oracle Database</code>，又名<code>Oracle RDBMS</code>，或简称<code>Oracle</code>。是甲骨文公司的一款关系数据库管理系统。它是在数据库领域一直处于领先地位的产品。可以说<code>Oracle</code>数据库系统是目前世界上流行的关系数据库管理系统，系统可移植性好、使用方便、功能强，适用于各类大、中、小、微机环境。它是一种高效率、可靠性好的适应高吞吐量的数据库解决方案。</p>
+<a id="more"></a> 
+<h3 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h3><ul>
+<li>相关文件准备（超链接为下载地址）<ul>
+<li>已安装好 <span class="exturl" data-url="aHR0cDovLzEwMS45Ni4xMC41OC9pc29yZWRpcmVjdC5jZW50b3Mub3JnL2NlbnRvcy83L2lzb3MveDg2XzY0L0NlbnRPUy03LXg4Nl82NC1EVkQtMTgwNC5pc28=" title="http://101.96.10.58/isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1804.iso">CentOS 7<i class="fa fa-external-link"></i></span> 最小化系统，并配置好了网络</li>
+<li>下载 <span class="exturl" data-url="aHR0cDovL3d3dy5vcmFjbGUuY29tL3RlY2huZXR3b3JrL2RhdGFiYXNlL2VudGVycHJpc2UtZWRpdGlvbi9kb3dubG9hZHMvZGF0YWJhc2UxMmMtbGludXgtZG93bmxvYWQtMjI0MDU5MS5odG1s" title="http://www.oracle.com/technetwork/database/enterprise-edition/downloads/database12c-linux-download-2240591.html">Oracle 12c<i class="fa fa-external-link"></i></span> 数据库企业版，2个压缩包哦</li>
+</ul>
+</li>
+<li>将<code>SELinux</code>设置为<code>enforcing</code>模式<br><code>`</code><h1 id="查看-SELinux-状态"><a href="#查看-SELinux-状态" class="headerlink" title="查看 SELinux 状态"></a>查看 SELinux 状态</h1>[root@centos7 ~]# sestatus<br>SELinux status:                 enabled<br>SELinuxfs mount:                /sys/fs/selinux<br>SELinux root directory:         /etc/selinux<br>Loaded policy name:             targeted<br>Current mode:                   enforcing<br>Mode from config file:          enforcing<br>Policy MLS status:              enabled<br>Policy deny_unknown status:     allowed<br>Max kernel policy version:      28</li>
+</ul>
+<h1 id="如果不是-enforcing-模式，则运行以下命令并重启即可生效。"><a href="#如果不是-enforcing-模式，则运行以下命令并重启即可生效。" class="headerlink" title="如果不是 enforcing 模式，则运行以下命令并重启即可生效。"></a>如果不是 enforcing 模式，则运行以下命令并重启即可生效。</h1><p>sed -i ‘s/SELINUX.*/SELINUX=enforcing/‘ /etc/selinux/config</p>
+<pre><code>* 为安全性考虑，启动防火墙服务（如果不启动可以跳过后面的防火墙配置）
+</code></pre><p>systemctl start firewalld # 启动防火墙<br>firewall-cmd –state # 查看当前防火墙状态</p>
+<pre><code>* 更新`CentOS 7`的`yum`源为国内源，以下源中任选一种即可，当然您一股脑的将下面命令全部运行也并没有什么问题。
+</code></pre><h1 id="备份并删除现有源"><a href="#备份并删除现有源" class="headerlink" title="备份并删除现有源"></a>备份并删除现有源</h1><p>cat /etc/yum.repos.d/<em> &gt; /etc/yum.repos.d/repo.bak<br>rm -rf /etc/yum.repos.d/</em>.repo</p>
+<h1 id="配置阿里源-2选1"><a href="#配置阿里源-2选1" class="headerlink" title="配置阿里源(2选1)"></a>配置阿里源(2选1)</h1><p>wget <span class="exturl" data-url="aHR0cDovL21pcnJvcnMuYWxpeXVuLmNvbS9yZXBvL0NlbnRvcy03LnJlcG8=" title="http://mirrors.aliyun.com/repo/Centos-7.repo">http://mirrors.aliyun.com/repo/Centos-7.repo<i class="fa fa-external-link"></i></span> -O /etc/yum.repos.d/CentOS-aliyun.repo</p>
+<h1 id="配置网易163源-2选1"><a href="#配置网易163源-2选1" class="headerlink" title="配置网易163源(2选1)"></a>配置网易163源(2选1)</h1><p>wget <span class="exturl" data-url="aHR0cDovL21pcnJvcnMuMTYzLmNvbS8uaGVscC9DZW50T1M3LUJhc2UtMTYzLnJlcG8=" title="http://mirrors.163.com/.help/CentOS7-Base-163.repo">http://mirrors.163.com/.help/CentOS7-Base-163.repo<i class="fa fa-external-link"></i></span> -O /etc/yum.repos.d/CentOS-163.repo</p>
+<h1 id="最后使源生效"><a href="#最后使源生效" class="headerlink" title="最后使源生效"></a>最后使源生效</h1><p>yum clean all &amp;&amp; yum makecache</p>
+<pre><code>* 把`CentOS`系统更新至最新组件
+</code></pre><p>yum update -y</p>
+<pre><code>
+### 安装步骤
+
+* 为`Oracle`数据库创建所须的操作系统用户及群组
+</code></pre><p>groupadd oinstall<br>groupadd dba<br>useradd -g oinstall -G dba oracle<br>passwd oracle<br>groups oracle # 查看用户所属的组</p>
+<pre><code>* 在`/etc/sysctl.conf`加入下列内核参数
+
+        fs.aio-max-nr = 1048576
+        ​fs.file-max = 6815744
+        ​kernel.shmall = 2097152
+        ​kernel.shmmax = 1987162112
+        ​kernel.shmmni = 4096
+        ​kernel.sem = 250 32000 100 128
+        ​net.ipv4.ip_local_port_range = 9000 65500
+        ​net.core.rmem_default = 262144
+        ​net.core.rmem_max = 4194304
+        ​net.core.wmem_default = 262144
+        ​net.core.wmem_max = 1048586
+
+* 检查并使修改的配置文件生效
+</code></pre><p>sysctl -p<br>sysctl -a</p>
+<pre><code>* 修改系统默认的对`oracle`用户一些限制，`以下命令没有反馈，请勿重复运行`
+</code></pre><p>cat &gt;&gt; /etc/security/limits.conf &lt;&lt;-EOF<br>oracle soft nproc 2047<br>oracle hard nproc 16384<br>oracle soft nofile 1024<br>oracle hard nofile 65536<br>oracle soft stack 10240<br>EOF</p>
+<pre><code>* 使用`xftp`工具或者scp命令将`Oracle`数据库文件上传到虚拟机的`/tmp`目录下
+* 将`Oracle`数据库安装文件解压至`/stage`目录，并修改`/stage`目录权限，解压文件名根据实际情况。
+</code></pre><p>mkdir /stage<br>yum install -y zip unzip<br>unzip /tmp/linuxamd64_12102_database_1of2.zip -d /stage/<br>unzip /tmp/linuxamd64_12102_database_2of2.zip -d /stage/<br>chown -R oracle:oinstall /stage/</p>
+<pre><code>* 为`Oracle`创建`/u01`作为安装目录，以及创建`/u02`作为数据库文件目录
+</code></pre><p>mkdir /u01<br>mkdir /u02<br>chown -R oracle:oinstall /u01<br>chown -R oracle:oinstall /u02<br>chmod -R 775 /u01<br>chmod -R 775 /u02<br>chmod g+s /u01 # g+s权限意为任何用户在此目录下创建的文件都具有和该目录所属的组相同的组<br>chmod g+s /u02</p>
+<pre><code>* 安装所需的组件
+</code></pre><p>yum install -y binutils.x86_64 compat-libcap1.x86_64 gcc.x86_64 gcc-c++.x86_64 glibc.i686 glibc.x86_64 glibc-devel.i686 glibc-devel.x86_64 ksh compat-libstdc++-33 libaio.i686 libaio.x86_64 libaio-devel.i686 libaio-devel.x86_64 libgcc.i686 libgcc.x86_64 libstdc++.i686 libstdc++.x86_64 libstdc++-devel.i686 libstdc++-devel.x86_64 libXi.i686 libXi.x86_64 libXtst.i686 libXtst.x86_64 make.x86_64 sysstat.x86_64</p>
+<pre><code>* 安装`X Window System`组件
+</code></pre><p>yum groupinstall -y “X Window System”</p>
+<pre><code>* 由于`Oracle`安装程序需要用到图形化界面，你可通过以下两个办法来进行
+    * 找任意一台带有图形界面的`Linux`或`Mac`系统的电脑远程登陆，`Mac`系统我猜想能用这个办法，而未测试
+</code></pre><pre><code>ssh -X oracle@ipaddr # 替换 ipaddr 为你的ip地址
+```
+* 利用一台拥有`SSH`客户端`(PuTTY)`和`X-Windows`图形用户接口`(Xming)`的`Windows`系统，可以参考[这里](https://wiki.centos.org/zh/HowTos/Xming)
+    * 首先下载 [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) 和 [Xming](http://sourceforge.net/projects/xming/files/latest/download) 工具
+    * 启动`Xming`和`Putty`，连接`Putty`前请先按照如下图所示进行设置
+    ![putty](https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw25r18raj20cg0c8t94.jpg)
+    * 测试窗口服务能否正常运行
+    ```
+    yum install xeyes -y 
+    xeyes 
+    ```
+</code></pre><ul>
+<li>请采用上述的方案登录为<code>oracle</code>用户，然后执行<code>Oracle</code>安装程序<pre><code>[oracle@centos7 ~]$ /stage/database/runInstaller
+Starting Oracle Universal Installer...
+</code></pre></li>
+</ul>
+<h3 id="Oracle-安装程序画面"><a href="#Oracle-安装程序画面" class="headerlink" title="Oracle 安装程序画面"></a>Oracle 安装程序画面</h3><ol>
+<li>安全性更新<br>假若你不想接收来自<code>Oracle</code>支持部的电邮，请取消勾选该项目并按<code>Next</code>，在新打开的窗口按<code>YES</code>。<br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw261e9rmj20me0h0q3y.jpg" alt="oracle-email"></li>
+<li>安装选项<br>选择<code>Create and configure a database</code>并按<code>Next</code>。</li>
+<li>系统级别<br>选择<code>Desktop Class</code>进行缺省的简便<code>Oracle</code>数据库安装。</li>
+<li>典型安装<br>在<code>Typical Install Configuration</code>画面，设置以下功能。另外请设置合适的<code>Database edition</code>（数据库版本）及<code>Character set</code>（字符集，最好为UTF-8）。为数据库的管理员设定密码，最后请取消勾选<code>Create as Container database</code>选项。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Oracle base</td>
+<td>/u01/app/oracle</td>
+</tr>
+<tr>
+<td>Software location</td>
+<td>/u01/app/oracle/product/12.1.0/dbhome_1</td>
+</tr>
+<tr>
+<td>Database file location</td>
+<td>/u02</td>
+</tr>
+<tr>
+<td>Global database name</td>
+<td>orcl.example.com</td>
+</tr>
+</tbody>
+</table>
+<ol start="5">
+<li><p>选择日志目录<br>选择<code>/u01/app/oraInventory</code>这个目录并点击下一步。</p>
+</li>
+<li><p>检查后点击安装</p>
+</li>
+<li>执行设置脚本<br>因为有些安装命令需要<code>root</code>用户权限，当询问窗口出现时，请登录用户<code>root</code>并执行以下两个脚本：<br><code>`</code><br>[root@centos7 ~]# /u01/app/oraInventory/orainstRoot.sh<br>Changing permissions of /u01/app/oraInventory.<br>Adding read,write permissions for group.<br>Removing read,write,execute permissions for world.<br>Changing groupname of /u01/app/oraInventory to oinstall.<br>The execution of the script is complete.</li>
+</ol>
+<p>[root@centos7 ~]# /u01/app/oracle/product/12.1.0/dbhome_1/root.sh<br>Performing root user operation.<br>The following environment variables are set as:<br>    ORACLE_OWNER= oracle<br>    ORACLE_HOME=  /u01/app/oracle/product/12.1.0/dbhome_1<br>Enter the full pathname of the local bin directory: [/usr/local/bin]: <press enter=""><br>   Copying dbhome to /usr/local/bin …<br>   Copying oraenv to /usr/local/bin …<br>   Copying coraenv to /usr/local/bin …<br>Creating /etc/oratab file…<br>Entries will be added to the /etc/oratab file as needed by<br>Database Configuration Assistant when a database is created<br>Finished running generic part of root script.<br>Now product-specific root actions will be performed.<br>You can follow the installation in a separated window.</press></p>
+<pre><code>8. 顺利完成安装
+安装过程非常慢，请耐性等待直至安装完成，如若遇到问题，请问度娘或者谷歌。
+
+### 安装后的任务
+
+#### 防火墙
+
+* 登陆`root`用户并执行以下命令来打开`Oracle`服务的防火墙
+</code></pre><p>firewall-cmd –zone=public –add-port=1521/tcp –add-port=5500/tcp –add-port=5520/tcp –add-port=3938/tcp –permanent<br>firewall-cmd –reload<br>firewall-cmd –list-ports # 查看已开通的防火墙端口</p>
+<pre><code>
+#### Oracle 工作环境
+
+* 登录为`oracle`用户并在`/home/oracle/.bash_profile`文件中添加以下信息：
+
+        TMPDIR=$TMP; export TMPDIR
+        ​ORACLE_BASE=/u01/app/oracle; export ORACLE_BASE
+        ​ORACLE_HOME=$ORACLE_BASE/product/12.1.0/dbhome_1; export ORACLE_HOME
+        ​ORACLE_SID=orcl; export ORACLE_SID
+        ​PATH=$ORACLE_HOME/bin:$PATH; export PATH
+        ​LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib:/usr/lib64; export LD_LIBRARY_PATH
+        ​CLASSPATH=$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib; export CLASSPATH
+
+* 运行以下命令使环境变量生效
+
+</code></pre><p>source ~/.bash_profile</p>
+<pre><code>
+#### 登陆数据库
+* 最后请登陆数据库：
+</code></pre><p>[oracle@centos7 ~]$ sqlplus system@orcl<br>… output omitted …<br>Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production<br>With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options<br>SQL&gt;<br><code>`</code></p>
+<h3 id="Ending…"><a href="#Ending…" class="headerlink" title="Ending…"></a>Ending…</h3><p>文中如果有错误的地方，欢迎评论与指正。如果你喜欢我写的文章，也可以点击下方的<code>打赏</code>支持一下，你的支持就是我更新的动力！谢谢大家🙏！</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>oracle</tag>
+        <tag>database</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>群晖上使用Docker搭建Aria2和迅雷远程服务，并配合FRP实现Aria2的远程下载</title>
+    <url>/posts/22032.html</url>
+    <content><![CDATA[<p><img class="post-images" data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw21wapqoj20go08wjs3.jpg"></p>
+<p>最近入手一个小马软路由V5，刚把ESXI+LEDE+DSM的环境配置好就迫不及待的搭建起远程下载，毕竟群晖自带的<code>Download Station</code>局限性很大。迅雷远程下载和<code>Aria2</code>都是必不可少的，现在还有很多下载链接是迅雷的，而Aria2我主要配合<code>chrome</code>插件<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FjZ290YWt1L0JhaWR1RXhwb3J0ZXI=" title="https://github.com/acgotaku/BaiduExporter">BaiduExporter<i class="fa fa-external-link"></i></span>来实现百度网盘的下载。本文详细介绍了群晖上<code>Aria2</code>的配置及其使用教程。</p>
+<a id="more"></a> 
+<h3 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h3><ul>
+<li>小马软路由V5</li>
+<li>ESXI6.7下黑裙晖DS3615xs</li>
+<li>DSM版本号6.1.7-15284</li>
+<li>群晖下Docker已经安装</li>
+<li>LEDE X86软路由</li>
+</ul>
+<h3 id="Aria2搭建"><a href="#Aria2搭建" class="headerlink" title="Aria2搭建"></a>Aria2搭建</h3><p>群晖因为没有大佬开发Aria2插件，所以简单的办法就是通过Docker来搭建Aria2服务。当然你也可以通过Docker来搭建各种服务，比如Aria2、迅雷远程和其他你能想到的任何服务。关于Docker是什么？<span class="exturl" data-url="aHR0cHM6Ly9iYWlrZS5iYWlkdS5jb20vaXRlbS9Eb2NrZXIvMTMzNDQ0NzA/ZnI9YWxhZGRpbg==" title="https://baike.baidu.com/item/Docker/13344470?fr=aladdin">百度百科<i class="fa fa-external-link"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly93d3cuZG9ja2VyLmNvbQ==" title="https://www.docker.com">Docker官网<i class="fa fa-external-link"></i></span></p>
+<h4 id="选择映像下载"><a href="#选择映像下载" class="headerlink" title="选择映像下载"></a>选择映像下载</h4><ul>
+<li>打开Docker控制面板</li>
+<li>选择注册表并搜索aria2关键词</li>
+<li><strong>注意最好选择红色框中的那个<code>Aria2</code>版本，其他版本配置可能不同</strong></li>
+<li>最后右键点击映像选择下载即可<br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw227tp9aj20tc0foq5l.jpg" alt="aria2选择映像"></li>
+<li>映像信息可以通过点击映像名称后面的小箭头打开此映像的作者写的<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL3h1amlua2FpL2FyaWEyLXdpdGgtd2VidWkv" title="https://hub.docker.com/r/xujinkai/aria2-with-webui/">介绍页面<i class="fa fa-external-link"></i></span>，下图可以看到需要配置的内容主要有下载路径<code>[/DOWNLOAD_DIR ]</code>、配置文件存放路径<code>[/CONFIG_DIR]</code>、密钥<code>[YOUR_SECRET_CODE]</code>以及端口号的修改。<br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw22jsa6dj20md0b9wfr.jpg" alt="aria2的docker页面"></li>
+</ul>
+<h4 id="配置容器"><a href="#配置容器" class="headerlink" title="配置容器"></a>配置容器</h4><ul>
+<li>等待映像下载完成，选择相应的映像启动它。<br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw22x107kj20t70fmq4e.jpg" alt="启动aria2映像"></li>
+<li>常规设置中可以根据自己的需要修改一下资源限制，一般默认就好，设置完别着急点下一步，选择高级设置。<br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw234yuxoj20ta0fmdhb.jpg" alt="aria2资源限制"></li>
+<li>说说主要需要修改的配置，未说明的根据自己的需要修改<code>[不懂的话就别改了]</code>，主要就是以下3步：添加卷，修改端口号和添加环境变量。<br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw23avxvej20ta0foq4t.jpg" alt="aria2添加卷"></li>
+<li>第一个端口为<code>Aria2</code>服务的端口，一般为6800，后面2个为<code>aria2webui</code>的端口。<br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw23ev8ssj20td0fo0ud.jpg" alt="aria2端口修改"></li>
+<li>设置环境变量的目的就是添加<code>Aria2</code>密钥，增强安全性，不添加则不设置密钥。<br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw23j53p1j20tb0fmtai.jpg" alt="aria2环境变量"></li>
+<li>配置完成后，直接点应用、下一步就行了。</li>
+</ul>
+<h4 id="关于BT下载"><a href="#关于BT下载" class="headerlink" title="关于BT下载"></a>关于BT下载</h4><p><code>Aria2</code>使用BT下载时由于很多链接都是国外的，下载没有速度。要解决这一点需要修改<code>Aria2</code>配置文件，配置文件在上一步中你添加的卷<code>/conf</code>对应的路径下查看。</p>
+<ul>
+<li>关于<code>trackerslist</code>可以查看<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25nb3NhbmcvdHJhY2tlcnNsaXN0" title="https://github.com/ngosang/trackerslist">这里<i class="fa fa-external-link"></i></span>。</li>
+<li>我推荐的<code>trackerslist</code>是这个<span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL25nb3NhbmcvdHJhY2tlcnNsaXN0L21hc3Rlci90cmFja2Vyc19iZXN0LnR4dA==" title="https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt">trackers_best<i class="fa fa-external-link"></i></span>。</li>
+<li><code>Aria2</code>配置文件修改可以参考<span class="exturl" data-url="aHR0cDovL3d3dy5uYXN5dW4uY29tL3RocmVhZC0zMDE2MS0xLTEuaHRtbA==" title="http://www.nasyun.com/thread-30161-1-1.html">这个<i class="fa fa-external-link"></i></span>。</li>
+<li>Linux、Mac用户可以通过以下命令来格式化<code>trackerslist</code>地址，会将其每一个地址用逗号分隔。<pre class=" language-bash"><code class="language-bash">curl -L https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt <span class="token operator">|</span> <span class="token function">sed</span> -e <span class="token string">'/^$/d'</span> <span class="token operator">|</span> <span class="token function">tr</span> <span class="token string">'\n'</span> <span class="token string">','</span>
+</code></pre>
+</li>
+</ul>
+<h4 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h4><ul>
+<li>不清楚什么原因，无法使用当前<code>Aria2</code>容器的<code>webui</code>。不过对我来说影响不大，因为有<span class="exturl" data-url="aHR0cDovL2FyaWEyYy5jb20=" title="http://aria2c.com">这个<i class="fa fa-external-link"></i></span>公网的<code>Aria2Webui</code>，方便内网和远程访问，需要的小伙伴可以收藏一下这个网址。</li>
+<li>打开<code>aria2webui</code>设置以下信息。<code>jsonrpc</code>地址设置为<code>http://token:密钥@内网ip:aria2端口/jsonrpc</code>。如果未设置密钥，<code>jsonrpc</code>地址为<code>http://内网ip:aria2端口/jsonrpc</code>。</li>
+</ul>
+<p><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw23payaqj210s0td76v.jpg" alt="aria2的jsonrpc修改"><br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw242dk8ij213w0whacg.jpg" alt="aria2访问效果"></p>
+<h3 id="Aria2远程下载"><a href="#Aria2远程下载" class="headerlink" title="Aria2远程下载"></a>Aria2远程下载</h3><p>以下是使用<span class="exturl" data-url="aHR0cHM6Ly93d3cuY2h1YW50b3Uub3Jn" title="https://www.chuantou.org">这个<i class="fa fa-external-link"></i></span>免费FRP服务器<code>[0.18.0版本]</code>配置的<code>Aria2</code>远程下载，<code>192.168.1.5</code>为群晖的内网ip地址。</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>local_ip</th>
+<th>local_port</th>
+<th>remote_port</th>
+<th>subdomain</th>
+<th>jsonrpc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tcp</td>
+<td>192.168.1.5</td>
+<td>6800</td>
+<td>52022</td>
+<td></td>
+<td><span class="exturl" data-url="aHR0cDovL3Rva2VuOnh4eHh4QGZycDMuY2h1YW50b3Uub3JnOjUyMDIyL2pzb25ycGM=" title="http://token:xxxxx@frp3.chuantou.org:52022/jsonrpc">http://token:xxxxx@frp3.chuantou.org:52022/jsonrpc<i class="fa fa-external-link"></i></span></td>
+</tr>
+<tr>
+<td>http</td>
+<td>192.168.1.5</td>
+<td>6800</td>
+<td></td>
+<td>monlor</td>
+<td><span class="exturl" data-url="aHR0cDovL3Rva2VuOnh4eHh4QG1vbmxvci5mcnAzLmNodWFudG91Lm9yZzo4MC9qc29ucnBj" title="http://token:xxxxx@monlor.frp3.chuantou.org:80/jsonrpc">http://token:xxxxx@monlor.frp3.chuantou.org:80/jsonrpc<i class="fa fa-external-link"></i></span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="Aria2百度云下载"><a href="#Aria2百度云下载" class="headerlink" title="Aria2百度云下载"></a>Aria2百度云下载</h3><ul>
+<li>首先下载<code>Aria2</code>百度云下载插件，<span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2FjZ290YWt1L0JhaWR1RXhwb3J0ZXIvbWFzdGVyL0JhaWR1RXhwb3J0ZXIuY3J4" title="https://raw.githubusercontent.com/acgotaku/BaiduExporter/master/BaiduExporter.crx">点击<i class="fa fa-external-link"></i></span>下载</li>
+<li>进入谷歌浏览器的扩展程序<br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw247347dj20iq0du0u1.jpg" alt="谷歌浏览器扩展程序"></li>
+<li>打开开发者模式，将插件拖入到浏览器空白位置<br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw24frcvmj211z0g0t9g.jpg" alt="谷歌浏览器扩展1"><br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw24jm2wyj211q0g3wfc.jpg" alt="谷歌浏览器扩展2"></li>
+<li>进入百度网盘，修改<code>BaiduExporter</code>插件的<code>jsonrpc</code>为你自己的。<br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw24nxup9j20nk096gmj.jpg" alt="百度网盘1"><br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw24ra24ij20hs0fst9v.jpg" alt="百度网盘2"></li>
+<li>修改完<code>jsonrpc</code>后就可以选择网盘的文件，导出到<code>Aria2</code>远程或者局域网下载了。<br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw24w5n9aj20n60bmtaa.jpg" alt="百度网盘3"></li>
+</ul>
+<h3 id="迅雷远程搭建"><a href="#迅雷远程搭建" class="headerlink" title="迅雷远程搭建"></a>迅雷远程搭建</h3><p>经过以上的<code>Aria2</code>配置，大家对迅雷的搭建应该也能轻车熟路了。</p>
+<ul>
+<li>注册表中搜索关键词<code>xware</code>，一般第一个结果就行</li>
+<li>迅雷挂载一个下载路径卷<code>/app/TDDOWNLOA</code>，选择你想挂载的路径</li>
+<li>启动完成后查看日志。然后在日志中找到类似<code>THE ACTIVE CODE IS: xxx</code>这样的字眼，xxx就是你的激活码。</li>
+<li>最后打开<span class="exturl" data-url="aHR0cDovL3l1YW5jaGVuZy54dW5sZWkuY29t" title="http://yuancheng.xunlei.com">迅雷远程<i class="fa fa-external-link"></i></span>页面，激活绑定你的迅雷远程服务就大功告成了！</li>
+</ul>
+<p><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw251ef7kj20t90fpmzh.jpg" alt="迅雷远程1"><br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw25545dkj20t20fmabd.jpg" alt="迅雷远程2"><br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw258fedcj20t70fitag.jpg" alt="迅雷远程3"><br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw25bivhnj20kl0ghdhx.jpg" alt="迅雷远程4"></p>
+<h3 id="Ending…"><a href="#Ending…" class="headerlink" title="Ending…"></a>Ending…</h3><p>文中如果有错误的地方，欢迎评论与指正。如果你喜欢我写的文章，也可以点击下方的<code>打赏</code>支持一下，你的支持就是我更新的动力！谢谢大家🙏！</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>群晖</category>
+      </categories>
+      <tags>
+        <tag>synology</tag>
+        <tag>thunder</tag>
+        <tag>aria2</tag>
+        <tag>frp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>FRP内网穿透服务免费使用的详细教程</title>
+    <url>/posts/26318.html</url>
+    <content><![CDATA[<p><img class="post-images" data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw1xlqq94j21yq0ya3z3.jpg"></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhdGVkaWVyL2ZycA==" title="https://github.com/fatedier/frp">FRP<i class="fa fa-external-link"></i></span>是一个可用于内网穿透的高性能的反向代理应用，支持 tcp, udp, http, https 协议。对于 http, https 服务支持基于域名的虚拟主机，支持自定义域名绑定，使多个域名可以共用一个80端口。说人话？就是让没有公网ip的你远程访问局域网内的各种服务，比如远程访问路由器后台、远程ssh、远程桌面等。<code>有公网ip的大佬就没必要继续往下看了</code>。</p>
+<a id="more"></a> 
+<h3 id="FRP服务器"><a href="#FRP服务器" class="headerlink" title="FRP服务器"></a>FRP服务器</h3><h4 id="免费服务器"><a href="#免费服务器" class="headerlink" title="免费服务器"></a>免费服务器</h4><p>免费服务器不稳定，速度慢，且一般仅开放部分端口，请谨慎使用！但如果需求量不大，偶尔远程访问一下路由器，也是没问题的。以下是一些免费frp服务器网址：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kaWFubmFvYm9zLmNvbS9mcnAv" title="https://diannaobos.com/frp/">https://diannaobos.com/frp/<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY2h1YW50b3Uub3Jn" title="https://www.chuantou.org">https://www.chuantou.org<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5mcnBzLnRvcA==" title="http://www.frps.top">http://www.frps.top<i class="fa fa-external-link"></i></span></li>
+</ul>
+<h4 id="自建服务器"><a href="#自建服务器" class="headerlink" title="自建服务器"></a>自建服务器</h4><p>自建frp服务器的速度，稳定性，可用端口完全取决于你的云服务器状况。这里推荐使用<span class="exturl" data-url="aHR0cDovL2tvb2xzaGFyZS5jbi90aHJlYWQtNjUzNzktMS0yLmh0bWw=" title="http://koolshare.cn/thread-65379-1-2.html">clang<i class="fa fa-external-link"></i></span>大大写的frp一键搭建脚本。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">wget</span> --no-check-certificate https://raw.githubusercontent.com/clangcn/onekey-install-shell/master/frps/install-frps.sh -O ./install-frps.sh
+<span class="token function">bash</span> install-frps.sh update
+</code></pre>
+<h3 id="基本配置信息"><a href="#基本配置信息" class="headerlink" title="基本配置信息"></a>基本配置信息</h3><p>只谈一下最新0.20.0的FRP基本配置，基本有以下几种配置信息<code>加粗表示必填</code>：</p>
+<ul>
+<li><strong>服务器地址</strong> [server_addr]</li>
+<li><strong>服务器FRP端口号</strong> [server_port]</li>
+<li><strong>服务器密钥</strong> [token] <code>老版本为[privilege_token]</code></li>
+<li><strong>底层通讯协议</strong> [protocol] <code>一般为kcp或者tcp</code></li>
+<li><strong>用户名</strong> [user] <code>这个随意填一个就行了</code></li>
+<li>日志配置随意</li>
+</ul>
+<h4 id="基本配置示例"><a href="#基本配置示例" class="headerlink" title="基本配置示例"></a>基本配置示例</h4><h5 id="配置文件信息"><a href="#配置文件信息" class="headerlink" title="配置文件信息"></a>配置文件信息</h5><pre><code>[common]
+server_addr = frp3.chuantou.org
+server_port = 7000
+token = www.chuantou.org
+protocol = kcp
+user = myname
+</code></pre><h5 id="koolshare插件基本配置"><a href="#koolshare插件基本配置" class="headerlink" title="koolshare插件基本配置"></a>koolshare插件基本配置</h5><p><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw1z0t6klj210o0rnq65.jpg" alt="基本配置"></p>
+<h3 id="穿透节点配置信息"><a href="#穿透节点配置信息" class="headerlink" title="穿透节点配置信息"></a>穿透节点配置信息</h3><ul>
+<li>穿透节点我常用的就是http、https和tcp，其实tcp和http是差不多的，只是配置了之后，访问的姿势不一样。</li>
+<li>比如我现在要穿透路由器内网ip为<code>192.168.1.1</code>的ssh服务，ssh服务的端口为<code>22</code>穿透到外网的<code>52210</code>。</li>
+<li><strong>以下我所使用的<span class="exturl" data-url="aHR0cHM6Ly93d3cuY2h1YW50b3Uub3Jn" title="https://www.chuantou.org">免费frp服务器<i class="fa fa-external-link"></i></span>，tcp穿透端口号范围50000-70000，请注意！</strong></li>
+<li>可能某些服务只能支持一种穿透方式。</li>
+</ul>
+<h4 id="tcp穿透方式"><a href="#tcp穿透方式" class="headerlink" title="tcp穿透方式"></a>tcp穿透方式</h4><ul>
+<li>[ssh-tcp] -&gt; 括号内为穿透节点的名称</li>
+<li>type -&gt; 穿透类型[<code>tcp/http/https等</code>]</li>
+<li>local_ip -&gt; 本地ip地址[<code>比如路由器内网ip</code>]</li>
+<li>local_port -&gt; 本地端口号[<code>要穿透的内网服务端口</code>]</li>
+<li>remote_port -&gt; 远程端口号[<code>外网访问内网服务的端口号</code>]</li>
+</ul>
+<h5 id="tcp配置文件信息"><a href="#tcp配置文件信息" class="headerlink" title="tcp配置文件信息"></a>tcp配置文件信息</h5><pre><code>[ssh-tcp]
+type = tcp
+local_ip = 192.168.1.1
+local_port = 22
+remote_port = 52210
+</code></pre><h5 id="koolshare插件tcp穿透配置"><a href="#koolshare插件tcp穿透配置" class="headerlink" title="koolshare插件tcp穿透配置"></a>koolshare插件tcp穿透配置</h5><p><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw1zv3214j20rf014weg.jpg" alt="tcp穿透配置"></p>
+<h5 id="tcp穿透成功"><a href="#tcp穿透成功" class="headerlink" title="tcp穿透成功"></a>tcp穿透成功</h5><p><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw1z9r70rj20ru0jx41m.jpg" alt="tcp穿透测试"></p>
+<p>ssh的tcp穿透配置完成后Linux、Mac或XShell环境下运行以下命令即可远程路由器:</p>
+<pre><code>ssh root@frp3.chuantou.org -p 52210
+</code></pre><h4 id="http穿透方式"><a href="#http穿透方式" class="headerlink" title="http穿透方式"></a>http穿透方式</h4><ul>
+<li>[ssh-http] -&gt; 括号内为穿透节点的名称</li>
+<li>type -&gt; 穿透类型[<code>tcp/http/https等</code>]</li>
+<li>local_ip -&gt; 本地ip地址[<code>比如路由器内网ip</code>]</li>
+<li>local_port -&gt; 本地端口号[<code>要穿透的内网服务端口</code>]</li>
+<li>subdomain -&gt; 子域名[<code>选一个没有被占用的名字</code>]</li>
+</ul>
+<h5 id="ssh配置文件信息"><a href="#ssh配置文件信息" class="headerlink" title="ssh配置文件信息"></a>ssh配置文件信息</h5><pre><code>[ssh-http]
+type = http
+local_ip = 192.168.1.1
+local_port = 22
+subdomain = monlor
+</code></pre><h5 id="koolshare插件http穿透配置"><a href="#koolshare插件http穿透配置" class="headerlink" title="koolshare插件http穿透配置"></a>koolshare插件http穿透配置</h5><p><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw2004efpj20ra015weh.jpg" alt="http穿透配置"></p>
+<h5 id="http穿透结果"><a href="#http穿透结果" class="headerlink" title="http穿透结果"></a>http穿透结果</h5><p><del>可能我测试的这个免费服务器问题，http穿透未测试成功，ssh的http穿透配置完成后终端ssh运行以下命令即可远程路由器:</del><br>额，经过测试ssh无法使用http穿透，测试过web服务器既可以使用http也可以使用tcp穿透方式的。下面例子使用免费服务器<code>frp3.chuantou.org</code>，<code>address</code>表示穿透成功后的访问地址。</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>local_ip</th>
+<th>local_port</th>
+<th>remote_port</th>
+<th>subdomain</th>
+<th>address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tcp</td>
+<td>192.168.1.1</td>
+<td>80</td>
+<td>52022</td>
+<td></td>
+<td>frp3.chuantou.org:52022</td>
+</tr>
+<tr>
+<td>http</td>
+<td>192.168.1.1</td>
+<td>80</td>
+<td></td>
+<td>monlor</td>
+<td>monlor.frp3.chuantou.org</td>
+</tr>
+</tbody>
+</table>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><h4 id="自建服务器的http和https端口配置问题"><a href="#自建服务器的http和https端口配置问题" class="headerlink" title="自建服务器的http和https端口配置问题"></a>自建服务器的http和https端口配置问题</h4><p>如果http配置为80端口，https配置为443端口，那么你使用http或https方式穿透之后是不用增加端口号访问的。如果使用其他端口，请加上端口号访问。使用这两个端口搭建frp服务器会占用你vps的相应端口，不过可以支持多个子域名共用端口80或443，不必像tcp穿透那样一个穿透节点占用一个端口。</p>
+<h4 id="版本号注意"><a href="#版本号注意" class="headerlink" title="版本号注意"></a>版本号注意</h4><p>FRP请一定要注意服务端版本号，有些版本不互相兼容。而且随着版本的更新，配置也发生了一定的更改。所以请跟你不同的版本选择不同的服务端配置，目前大概有三个版本：</p>
+<ul>
+<li>0.9.3以前的版本</li>
+<li>0.9.3至0.17.0版本</li>
+<li>0.17.0至0.20.0版本</li>
+</ul>
+<h4 id="免费服务器常见问题"><a href="#免费服务器常见问题" class="headerlink" title="免费服务器常见问题"></a>免费服务器常见问题</h4><p><strong>FRP服务启动失败，请检查FRP穿透节点配置中的子域名<code>http</code>和远程端口<code>tcp</code>配置，<br>极可能已经被和你使用同样免费服务器的人占用了，尝试多次更换这2个配置，并重启服务。</strong></p>
+<h3 id="穿透截图"><a href="#穿透截图" class="headerlink" title="穿透截图"></a>穿透截图</h3><p><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw2068fegj210s0td0u2.jpg" alt="lede的web穿透"><br><img data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw20av3rwj213w0whhdt.jpg" alt="dsm的web穿透"></p>
+<h3 id="Ending…"><a href="#Ending…" class="headerlink" title="Ending…"></a>Ending…</h3><p>文中如果有错误的地方，欢迎评论与指正。如果你喜欢我写的文章，也可以点击下方的<code>打赏</code>支持一下，你的支持就是我更新的动力！谢谢大家🙏！</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>路由器</tag>
+        <tag>frp</tag>
+        <tag>内网穿透</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小米路由器Monlor-Tools工具箱2.0，支持小米路由最新固件</title>
+    <url>/posts/54879.html</url>
+    <content><![CDATA[<p><img class="post-images" data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw1ykkvd2j20ne0ii0wo.jpg"></p>
+<p>工具箱正处于测试状态，安装需要有一定的动手能力。支持以下的路由器，arm路由: R1D R2D R3D，mips路由: R3 R3P R3G R1CM</p>
+<a id="more"></a> 
+<p>目前支持了以下几种插件:  </p>
+<blockquote>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuemVyb3RpZXIuY29t" title="https://www.zerotier.com">ZeroTier<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2tvb2xzaGFyZS5iMC51cGFpeXVuLmNvbS8=" title="http://koolshare.b0.upaiyun.com/">KoolProxy<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2FyaWEyLmdpdGh1Yi5pby8=" title="http://aria2.github.io/">Aria2<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zZWN1cml0eS5hcHBzcG90LmNvbS92c2Z0cGQuaHRtbA==" title="https://security.appspot.com/vsftpd.html">VsFtpd<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1dpbmQ0L3ZsbWNzZA==" title="https://github.com/Wind4/vlmcsd">kms<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhdGVkaWVyL2ZycA==" title="https://github.com/fatedier/frp">Frpc<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Rvc2dvL25ncm9rLWM=" title="https://github.com/dosgo/ngrok-c">Ngrok<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NoZWxsaW5hYm94L3NoZWxsaW5hYm94" title="https://github.com/shellinabox/shellinabox">WebShell<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Rpbnlwcm94eS90aW55cHJveHk=" title="https://github.com/tinyproxy/tinyproxy">TinyProxy<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0VudHdhcmUvRW50d2FyZS1uZw==" title="https://github.com/Entware/Entware-ng">Entware<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9rb2RjbG91ZC5jb20v" title="https://kodcloud.com/">KodExplorer<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2tvb2xzaGFyZS5jbi90aHJlYWQtMTI5MTk5LTEtMS5odG1s" title="http://koolshare.cn/thread-129199-1-1.html">EasyExplorer<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL25naW54Lm9yZy8=" title="http://nginx.org/">HttpFile<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3ZlcnlzeW5jLmNvbS8=" title="http://verysync.com/">VerySync<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZmZm9uaW9uL1h1bmxlaS1GYXN0ZGljaw==" title="https://github.com/fffonion/Xunlei-Fastdick">FastDick<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cubmV0ZmlsdGVyLm9yZy8=" title="https://www.netfilter.org/">FireWall<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2Jsb2cubGFueXVzLmNvbS9hcmNoaXZlcy8xNzQuaHRtbA==" title="http://blog.lanyus.com/archives/174.html">JetBrains<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2tvb2xzaGFyZS5jbi90aHJlYWQtMTI3NzgzLTEtMS5odG1s" title="http://koolshare.cn/thread-127783-1-1.html">QianDao<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZpbGVicm93c2VyL2ZpbGVicm93c2Vy" title="https://github.com/filebrowser/filebrowser">FileBrowser<i class="fa fa-external-link"></i></span></li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h3><h4 id="插件的安装"><a href="#插件的安装" class="headerlink" title="插件的安装"></a>插件的安装</h4><ol>
+<li>离线安装插件，<code>appmanage.sh add /tmp/kms.tar.gz</code>安装插件</li>
+<li>在线安装插件，默认下载源coding.net，安装命令<code>appmanage.sh add kms</code></li>
+<li>monlor命令一键安装插件[推荐]</li>
+</ol>
+<h4 id="一键安装命令"><a href="#一键安装命令" class="headerlink" title="一键安装命令"></a>一键安装命令</h4><pre class=" language-bash"><code class="language-bash">sh -c <span class="token string">"<span class="token variable"><span class="token variable">$(</span>curl -kfsSl https://coding.net/u/monlor/p/Monlor-Tools/git/raw/master/install.sh<span class="token variable">)</span></span>"</span> <span class="token operator">&amp;&amp;</span> <span class="token function">source</span> /etc/profile <span class="token operator">&amp;</span><span class="token operator">></span> /dev/null
+</code></pre>
+<hr>
+<h3 id="工具箱命令"><a href="#工具箱命令" class="headerlink" title="工具箱命令"></a>工具箱命令</h3><ol>
+<li>卸载：<code>uninstall.sh</code> （不推荐）</li>
+<li>更新：<code>update.sh [-f]</code> (不推荐)</li>
+<li>初始化：<code>init.sh</code></li>
+<li>插件管理：<code>appmanage.sh add|upgrade|del appname [-f]</code></li>
+<li>工具箱配置：<code>monlor</code> (任意界面Ctrl + c可以退出配置)</li>
+<li>在线更新：<code>sh -c "$(curl -kfsSl $(uci get monlor.tools.url)/scripts/update.sh)"</code></li>
+<li>在线卸载：<code>sh -c "$(curl -kfsSl $(uci get monlor.tools.url)/scripts/uninstall.sh)"</code></li>
+</ol>
+<hr>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><pre><code>/
+|--- /etc  
+|--- /monlor
+|    |--- /apps/        --- 插件安装位置  
+|    |--- /config/      --- 工具箱配置文件
+|    |--- /scripts/     --- 工具箱脚本
+|    |--- /web/         --- web页面文件
+|--- /tmp
+|    |--- /messages     --- 系统日志，工具箱日志
+|--- /userdisk
+|    |--- /data/        --- 硬盘目录
+|--- /extdisks/
+|    |--- /sd*/         --- 外接盘目录
+|--- /var/
+|    |--- /log/         --- 插件日志存放目录
+</code></pre><hr>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li>如果插件和工具箱都有更新，请务必先更新工具箱！</li>
+<li>工具箱没有web界面，完全靠Shell开发，插件的安装、卸载、配置由配置文件完成。   </li>
+<li>安装完成后执行monlor命令配置工具箱，Ctrl + c或者输入exit可以退出。</li>
+<li>关于迅雷快鸟FastDick，请按<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZmZm9uaW9uL1h1bmxlaS1GYXN0ZGljaw==" title="https://github.com/fffonion/Xunlei-Fastdick">Xunlei-Fastdick<i class="fa fa-external-link"></i></span>这里的教程运行swjsq.py并找到运行成功后生成的swjsq_wget.sh文件，提取里面的uid,pwd,peerid即可。</li>
+<li>插件列表显示异常运行<code>rm -rf $(uci get monlor.tools.path)/config/applist.txt</code>，运行monlor会自动获取插件列表</li>
+<li>提问前请指出你的路由器型号，工具箱版本。如果是插件问题运行<code>cat /var/log/appname*</code>命令提交日志给我(appname为插件名，部分插件没有日志)</li>
+</ol>
+<hr>
+<h3 id="更新内容"><a href="#更新内容" class="headerlink" title="更新内容"></a>更新内容</h3><p>2018-06-24</p>
+<ol>
+<li>插件Entware可以启动ONMP安装程序，安装前请勿安装HttpFile和KodExplorer</li>
+<li>插件Frpc现在支持版本号选择，并默认安装版本更新到0.20.0</li>
+<li>现在管理菜单添加临时性功能，web界面安装设置</li>
+</ol>
+<p>2018-06-16</p>
+<ol>
+<li>工具箱新增web界面，暂时只有kp插件，支持最新版固件</li>
+<li>新增插件“自动签到”，arm平台aria2程序更新到1.34</li>
+<li>工具箱旧的备份文件已不支持，请重新备份</li>
+<li>新增插件filebrowser，web文件管理工具，感谢编译@狂飙的小蜗牛</li>
+<li>本次更新可能导致旧版不能用，请及时更新，如果更新有问题，使用以下命令更新</li>
+<li><code>curl -skL $(uci get monlor.tools.url)/scripts/update.sh | sh</code></li>
+</ol>
+<p>2018-04-29</p>
+<ol>
+<li>工具箱添加环境变量文件</li>
+<li>修改完samba配置后增加重启samba程序的步骤以保证配置生效</li>
+</ol>
+<p>2018-04-01</p>
+<ol>
+<li>优化了工具箱界面，愚人节快乐！</li>
+</ol>
+<p>2018-03-31</p>
+<ol>
+<li>现已支持安装工具箱到内存空间，可不插入U盘安装工具箱，主要针对于小米路由器mini。</li>
+<li>内存安装模式如果出现开机配置未恢复的情况，可手动运行:monlor recover</li>
+</ol>
+<p>2018-03-30</p>
+<ol>
+<li>工具箱默认不再开通22端口，请安装FireWall插件开通</li>
+</ol>
+<p>2018-03-29</p>
+<ol>
+<li>修复更新脚本无法更新的问题(感谢@michealhansun测试)</li>
+<li>修复了R3上aria2插件无法运行的问题(感谢@michealhansun测试)</li>
+</ol>
+<p>2018-03-10</p>
+<ol>
+<li>更新了封装的一些功能，导致有所插件必须更新</li>
+<li>修复了mips上aria2插件的问题，R3测试正常(感谢@wanghurui)，R3G上未测试</li>
+<li>修复aria2脚本及配置的多出BUG</li>
+</ol>
+<p>2018-02-27</p>
+<ol>
+<li>更新arm的frpc版本为0.16.0</li>
+<li>修复KoolProxy运行命令的一个小问题</li>
+<li>顺带解决一下小米路由器R2D（或其他型号上）可能出现的top命令使用的问题</li>
+<li>更新封装功能ucish和cru到工具箱，将影响到插件FireWall、Frpc和KoolProxy，更新工具箱请同时更新插件</li>
+</ol>
+<p>2018-02-14</p>
+<ol>
+<li>优化了工具箱各个脚本，修复了版本号对比问题</li>
+<li>增加插件迅雷快鸟FastDick，请根据<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZmZm9uaW9uL1h1bmxlaS1GYXN0ZGljaw==" title="https://github.com/fffonion/Xunlei-Fastdick">Xunlei-Fastdick<i class="fa fa-external-link"></i></span>这里的教程运行swjsq.py并找到运行成功后生成的swjsq_wget.sh文件，提取里面的uid,pwd,peerid即可。</li>
+<li>更新监控脚本，解决小米路由CPU占用100%的问题</li>
+</ol>
+<p>2018-02-08</p>
+<ol>
+<li>修复了mips的KoolProxy无法使用https的问题，感谢@wanghurui的测试。</li>
+</ol>
+<p>2018-02-05</p>
+<ol>
+<li>修复了mips的verysync无法运行问题</li>
+<li>更新了kp规则更新方式</li>
+<li>因为之前没有用在线获取更新脚本的方式更新，以前的版本请更新2次工具箱，update.sh &amp;&amp; update.sh -f，以后的版本直接运行monlor更新即可。</li>
+</ol>
+<p>2018-01-18</p>
+<ol>
+<li>增加文件同步工具verysync，mips路由可能内存不足。</li>
+</ol>
+<p>2018-01-12</p>
+<ol>
+<li>更新arm的Frpc版本至0.14.1</li>
+<li>修复插件列表更新bug，更新失败的问题</li>
+</ol>
+<p>2018-01-10</p>
+<ol>
+<li>增加插件HttpFile基于http的文件查看工具</li>
+</ol>
+<p>2018-01-08</p>
+<ol>
+<li>区分mips路由和arm路由的插件列表显示</li>
+<li>完善备份功能，一键备份恢复</li>
+</ol>
+<p>2018-01-06</p>
+<ol>
+<li>完成了所有功能的终端提示界面</li>
+<li>monlor命令可以管理插件，配置插件，更新卸载工具箱，备份恢复插件配置</li>
+<li>R3测试了部分插件</li>
+<li>建议重新安装工具箱，安装完成配置好插件后，建议备份配置</li>
+<li>只要路由器不坏，工具箱会坚持更新到有web界面的版本，重在学习</li>
+</ol>
+<h3 id="Ending…"><a href="#Ending…" class="headerlink" title="Ending…"></a>Ending…</h3><p>文中如果有错误的地方，欢迎评论与指正。如果你喜欢我写的文章，也可以点击下方的<code>打赏</code>支持一下，你的支持就是我更新的动力！谢谢大家🙏！</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>开发</category>
+      </categories>
+      <tags>
+        <tag>路由器</tag>
+        <tag>工具箱</tag>
+        <tag>aria2</tag>
+        <tag>frp</tag>
+      </tags>
+  </entry>
+</search>

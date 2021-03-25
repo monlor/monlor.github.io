@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Monlor&#39;s Blog</title>
+  
+  <subtitle>生命不息，折腾不止</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://www.monlor.com/"/>
+  <updated>2021-03-25T07:59:31.361Z</updated>
+  <id>https://www.monlor.com/</id>
+  
+  <author>
+    <name>monlor</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Apple 日历订阅开启节假日显示</title>
+    <link href="https://www.monlor.com/posts/7877.html"/>
+    <id>https://www.monlor.com/posts/7877.html</id>
+    <published>2021-03-25T07:59:31.361Z</published>
+    <updated>2021-03-25T07:59:31.361Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;注意：暂时只能在 Mac 下添加，IOS 下暂时没有找到可以添加日历订阅的地方，但是在 Mac 添加后 IOS 可以同步更新&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;环境&quot;&gt;&lt;a href=&quot;#环境&quot; class=&quot;headerlink&quot; title=&quot;环境&quot;&gt;&lt;/a&gt;环境&lt;/h3&gt;&lt;p&gt;设备：MacBook Pro 13’’ &lt;/p&gt;
+&lt;p&gt;系统版本：macOS Big Sur 11.2.2&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="小技巧" scheme="https://www.monlor.com/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    
+    
+      <category term="+ Apple" scheme="https://www.monlor.com/tags/Apple/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>小米/红米路由器AC2100开启ssh并安装MIXBOX</title>
+    <link href="https://www.monlor.com/posts/19407.html"/>
+    <id>https://www.monlor.com/posts/19407.html</id>
+    <published>2020-05-15T07:38:34.000Z</published>
+    <updated>2021-03-25T07:59:31.365Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img class=&quot;post-images&quot; data-src=&quot;https://i1.mifile.cn/f/i/16/chain/miwifiac/miwifi-solid.jpg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;小米/红米路由器&lt;code&gt;AC2100&lt;/code&gt;通过远程&lt;code&gt;telnet&lt;/code&gt;漏洞破解开启&lt;code&gt;ssh&lt;/code&gt;，可能也适用于其他小米路由器&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="路由器" scheme="https://www.monlor.com/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
+    
+    
+      <category term="mixbox" scheme="https://www.monlor.com/tags/mixbox/"/>
+    
+      <category term="路由器" scheme="https://www.monlor.com/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
+    
+      <category term="小米" scheme="https://www.monlor.com/tags/%E5%B0%8F%E7%B1%B3/"/>
+    
+      <category term="工具箱" scheme="https://www.monlor.com/tags/%E5%B7%A5%E5%85%B7%E7%AE%B1/"/>
+    
+      <category term="插件" scheme="https://www.monlor.com/tags/%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>小米路由器MIXBOX工具箱公测版本发布，支持小米路由器全型号</title>
+    <link href="https://www.monlor.com/posts/54973.html"/>
+    <id>https://www.monlor.com/posts/54973.html</id>
+    <published>2019-01-01T03:11:17.000Z</published>
+    <updated>2021-03-25T07:59:31.365Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img class=&quot;post-images&quot; data-src=&quot;https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw1vptov7j20rn0izgr3.jpg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;MIXBOX是一款全新的，完全基于Shell脚本的工具箱，为在路由器上实现程序的快速配置及运行管理，欢迎大佬们stars、fork及pr.&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;https://github.com/monlor/MIXBOX/workflows/Main-CI/badge.svg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://www.monlor.com/categories/Linux/"/>
+    
+      <category term="开发" scheme="https://www.monlor.com/categories/Linux/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="mixbox" scheme="https://www.monlor.com/tags/mixbox/"/>
+    
+      <category term="路由器" scheme="https://www.monlor.com/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
+    
+      <category term="小米" scheme="https://www.monlor.com/tags/%E5%B0%8F%E7%B1%B3/"/>
+    
+      <category term="工具箱" scheme="https://www.monlor.com/tags/%E5%B7%A5%E5%85%B7%E7%AE%B1/"/>
+    
+      <category term="插件" scheme="https://www.monlor.com/tags/%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[转载]DIY你自己的 Arch Linux 软路由</title>
+    <link href="https://www.monlor.com/posts/41757.html"/>
+    <id>https://www.monlor.com/posts/41757.html</id>
+    <published>2018-12-23T06:58:00.000Z</published>
+    <updated>2021-03-25T07:59:31.361Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img class=&quot;post-images&quot; data-src=&quot;https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw26p781dj20go05jt8q.jpg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;大部分人玩软路由都采用ESXI这款虚拟机系统，准备好16G大内存，搞个黑群辉，然后挂个Lean大的OpenWrt-x86等等。 但是本人对虚拟机并无任何好感，主要是觉得浪费硬件资源，然后配置起来受到一些局限，因此就想到干脆直接装个Linux做路由器。 当然，是装最好用的发行版—Arch Linux.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="路由器" scheme="https://www.monlor.com/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
+    
+    
+      <category term="arch" scheme="https://www.monlor.com/tags/arch/"/>
+    
+      <category term="linux" scheme="https://www.monlor.com/tags/linux/"/>
+    
+      <category term="router" scheme="https://www.monlor.com/tags/router/"/>
+    
+      <category term="iptables" scheme="https://www.monlor.com/tags/iptables/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CentOS 7下Oracle 12c数据库安装教程</title>
+    <link href="https://www.monlor.com/posts/9565.html"/>
+    <id>https://www.monlor.com/posts/9565.html</id>
+    <published>2018-08-06T10:27:30.000Z</published>
+    <updated>2021-03-25T07:59:31.365Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img class=&quot;post-images&quot; data-src=&quot;https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw25hno8tj20nc09qq35.jpg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Oracle Database&lt;/code&gt;，又名&lt;code&gt;Oracle RDBMS&lt;/code&gt;，或简称&lt;code&gt;Oracle&lt;/code&gt;。是甲骨文公司的一款关系数据库管理系统。它是在数据库领域一直处于领先地位的产品。可以说&lt;code&gt;Oracle&lt;/code&gt;数据库系统是目前世界上流行的关系数据库管理系统，系统可移植性好、使用方便、功能强，适用于各类大、中、小、微机环境。它是一种高效率、可靠性好的适应高吞吐量的数据库解决方案。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数据库" scheme="https://www.monlor.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="Oracle" scheme="https://www.monlor.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/Oracle/"/>
+    
+    
+      <category term="linux" scheme="https://www.monlor.com/tags/linux/"/>
+    
+      <category term="oracle" scheme="https://www.monlor.com/tags/oracle/"/>
+    
+      <category term="database" scheme="https://www.monlor.com/tags/database/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>群晖上使用Docker搭建Aria2和迅雷远程服务，并配合FRP实现Aria2的远程下载</title>
+    <link href="https://www.monlor.com/posts/22032.html"/>
+    <id>https://www.monlor.com/posts/22032.html</id>
+    <published>2018-07-29T03:57:26.000Z</published>
+    <updated>2021-03-25T07:59:31.365Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img class=&quot;post-images&quot; data-src=&quot;https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw21wapqoj20go08wjs3.jpg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;最近入手一个小马软路由V5，刚把ESXI+LEDE+DSM的环境配置好就迫不及待的搭建起远程下载，毕竟群晖自带的&lt;code&gt;Download Station&lt;/code&gt;局限性很大。迅雷远程下载和&lt;code&gt;Aria2&lt;/code&gt;都是必不可少的，现在还有很多下载链接是迅雷的，而Aria2我主要配合&lt;code&gt;chrome&lt;/code&gt;插件&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9naXRodWIuY29tL2FjZ290YWt1L0JhaWR1RXhwb3J0ZXI=&quot; title=&quot;https://github.com/acgotaku/BaiduExporter&quot;&gt;BaiduExporter&lt;i class=&quot;fa fa-external-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;来实现百度网盘的下载。本文详细介绍了群晖上&lt;code&gt;Aria2&lt;/code&gt;的配置及其使用教程。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="群晖" scheme="https://www.monlor.com/categories/%E7%BE%A4%E6%99%96/"/>
+    
+    
+      <category term="synology" scheme="https://www.monlor.com/tags/synology/"/>
+    
+      <category term="thunder" scheme="https://www.monlor.com/tags/thunder/"/>
+    
+      <category term="aria2" scheme="https://www.monlor.com/tags/aria2/"/>
+    
+      <category term="frp" scheme="https://www.monlor.com/tags/frp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FRP内网穿透服务免费使用的详细教程</title>
+    <link href="https://www.monlor.com/posts/26318.html"/>
+    <id>https://www.monlor.com/posts/26318.html</id>
+    <published>2018-07-28T10:37:22.000Z</published>
+    <updated>2021-03-25T07:59:31.365Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img class=&quot;post-images&quot; data-src=&quot;https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw1xlqq94j21yq0ya3z3.jpg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9naXRodWIuY29tL2ZhdGVkaWVyL2ZycA==&quot; title=&quot;https://github.com/fatedier/frp&quot;&gt;FRP&lt;i class=&quot;fa fa-external-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;是一个可用于内网穿透的高性能的反向代理应用，支持 tcp, udp, http, https 协议。对于 http, https 服务支持基于域名的虚拟主机，支持自定义域名绑定，使多个域名可以共用一个80端口。说人话？就是让没有公网ip的你远程访问局域网内的各种服务，比如远程访问路由器后台、远程ssh、远程桌面等。&lt;code&gt;有公网ip的大佬就没必要继续往下看了&lt;/code&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="https://www.monlor.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="路由器" scheme="https://www.monlor.com/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
+    
+      <category term="frp" scheme="https://www.monlor.com/tags/frp/"/>
+    
+      <category term="内网穿透" scheme="https://www.monlor.com/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>小米路由器Monlor-Tools工具箱2.0，支持小米路由最新固件</title>
+    <link href="https://www.monlor.com/posts/54879.html"/>
+    <id>https://www.monlor.com/posts/54879.html</id>
+    <published>2018-07-26T15:06:31.000Z</published>
+    <updated>2021-03-25T07:59:31.365Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img class=&quot;post-images&quot; data-src=&quot;https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw1ykkvd2j20ne0ii0wo.jpg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;工具箱正处于测试状态，安装需要有一定的动手能力。支持以下的路由器，arm路由: R1D R2D R3D，mips路由: R3 R3P R3G R1CM&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://www.monlor.com/categories/Linux/"/>
+    
+      <category term="开发" scheme="https://www.monlor.com/categories/Linux/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="路由器" scheme="https://www.monlor.com/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
+    
+      <category term="工具箱" scheme="https://www.monlor.com/tags/%E5%B7%A5%E5%85%B7%E7%AE%B1/"/>
+    
+      <category term="aria2" scheme="https://www.monlor.com/tags/aria2/"/>
+    
+      <category term="frp" scheme="https://www.monlor.com/tags/frp/"/>
+    
+  </entry>
+  
+</feed>

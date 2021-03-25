@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-64x64-monlor.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-monlor.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-monlor.ico">
+  <link rel="mask-icon" href="/images/favicon-128x128-monlor.ico" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.monlor.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="大部分人玩软路由都采用ESXI这款虚拟机系统，准备好16G大内存，搞个黑群辉，然后挂个Lean大的OpenWrt-x86等等。 但是本人对虚拟机并无任何好感，主要是觉得浪费硬件资源，然后配置起来受到一些局限，因此就想到干脆直接装个Linux做路由器。 当然，是装最好用的发行版—Arch Linux.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[转载]DIY你自己的 Arch Linux 软路由">
+<meta property="og:url" content="https://www.monlor.com/posts/41757.html">
+<meta property="og:site_name" content="Monlor&#39;s Blog">
+<meta property="og:description" content="大部分人玩软路由都采用ESXI这款虚拟机系统，准备好16G大内存，搞个黑群辉，然后挂个Lean大的OpenWrt-x86等等。 但是本人对虚拟机并无任何好感，主要是觉得浪费硬件资源，然后配置起来受到一些局限，因此就想到干脆直接装个Linux做路由器。 当然，是装最好用的发行版—Arch Linux.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw26p781dj20go05jt8q.jpg">
+<meta property="article:published_time" content="2018-12-23T06:58:00.000Z">
+<meta property="article:modified_time" content="2021-03-25T07:59:31.361Z">
+<meta property="article:author" content="monlor">
+<meta property="article:tag" content="arch">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="router">
+<meta property="article:tag" content="iptables">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw26p781dj20go05jt8q.jpg">
+
+<link rel="canonical" href="https://www.monlor.com/posts/41757.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>[转载]DIY你自己的 Arch Linux 软路由 | Monlor's Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8632b65d59500e8e7a1ae3a99c598d17";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Monlor's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">生命不息，折腾不止</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vbmxvcg==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.monlor.com/posts/41757.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon-64x64-monlor.ico">
+      <meta itemprop="name" content="monlor">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Monlor's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [转载]DIY你自己的 Arch Linux 软路由
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-23 14:58:00" itemprop="dateCreated datePublished" datetime="2018-12-23T14:58:00+08:00">2018-12-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-25 15:59:31" itemprop="dateModified" datetime="2021-03-25T15:59:31+08:00">2021-03-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">路由器</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img class="post-images" data-src="https://cdn.jsdelivr.net/gh/monlor/file/img/cf5b43c9gy1fyw26p781dj20go05jt8q.jpg"></p>
+<p>大部分人玩软路由都采用ESXI这款虚拟机系统，准备好16G大内存，搞个黑群辉，然后挂个Lean大的OpenWrt-x86等等。 但是本人对虚拟机并无任何好感，主要是觉得浪费硬件资源，然后配置起来受到一些局限，因此就想到干脆直接装个Linux做路由器。 当然，是装最好用的发行版—Arch Linux.</p>
+<a id="more"></a> 
+<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>本文适合Arch Linux教徒阅读，其他发行版可以参考</p>
+<h3 id="安装Arch-Linux到你的软路由"><a href="#安装Arch-Linux到你的软路由" class="headerlink" title="安装Arch Linux到你的软路由"></a>安装Arch Linux到你的软路由</h3><p>请参考 <span class="exturl" data-url="aHR0cHM6Ly93aWtpLmFyY2hsaW51eC5vcmcvaW5kZXgucGhwL0luc3RhbGxhdGlvbl9ndWlkZQ==" title="https://wiki.archlinux.org/index.php/Installation_guide">Arch Wiki/Installation_guide<i class="fa fa-external-link"></i></span>, 本文不再赘述。</p>
+<h3 id="配置网卡"><a href="#配置网卡" class="headerlink" title="配置网卡"></a>配置网卡</h3><p><strong>p.s.安装完成后别忙退出chroot环境</strong></p>
+<h4 id="配置udev规则，对网卡进行重命名"><a href="#配置udev规则，对网卡进行重命名" class="headerlink" title="配置udev规则，对网卡进行重命名"></a>配置udev规则，对网卡进行重命名</h4><p>创建 <code>/etc/udev/rules.d/10-network.rules</code>， 内容大致如下：</p>
+<pre><code>SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="00:11:22:33:44:55", NAME="net0"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="11:22:33:44:55:66", NAME="net1"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="22:33:44:55:66:77", NAME="net2"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="33:44:55:66:77:88", NAME="net3"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="44:55:66:77:88:99", NAME="wifi0"
+</code></pre><p>其中<code>ATTR{address}</code>是网卡的mac地址，可以用命令<code>ip a</code>查看，<code>NAME</code>是重命名后的名字。</p>
+<p><strong>p.s.请勿使用ethX和wlanX这类的名字，因为内核命名网卡采用的是这些名字，这将导致命名网卡的时候出现竞争冒险</strong></p>
+<p><strong>这里我们做个约定：net0作为路由器的WAN口连接外网，剩余的接口我们桥接成LAN口br0，下面马上会讲到。</strong></p>
+<h4 id="配置netctl"><a href="#配置netctl" class="headerlink" title="配置netctl"></a>配置netctl</h4><h5 id="配置WAN口"><a href="#配置WAN口" class="headerlink" title="配置WAN口"></a>配置WAN口</h5><p>如果WAN侧使用的是DHCP自动获取ip，那么创建一个配置文件<code>/etc/netctl/net0-dhcp-profile</code>，内容如下:</p>
+<pre><code>Description='WAN Interface.'
+Interface=net0
+Connection=ethernet
+IP='dhcp'
+#DNS=('127.0.0.1')
+#DHCPClient=dhcpcd
+#DHCPReleaseOnStop=no
+## for DHCPv6
+#IP6=dhcp
+#DHCP6Client=dhclient
+## for IPv6 autoconfiguration
+#IP6=stateless
+</code></pre><p>根据需要可以设置DNS，ipv6等。</p>
+<p><strong>设置完后执行netctl enable net0-dhcp-profile来启用配置，如果配置文件发生了变化，需要执行netctl reenable net0-dhcp-profile来生效</strong></p>
+<p>如果WAN口采用PPPoE拨号上网的方式，<code>pacman -S rp-pppoe</code>来安装拨号插件<code>rp-pppoe</code>, 创建配置文件<code>/etc/netctl/net0-pppoe-profile</code>，如下：</p>
+<pre><code>Description='WAN PPPoE connection'
+Interface=net0
+Connection=pppoe
+User='user@server'
+Password='your-password-here'
+
+# Always keep a connection established
+ConnectionMode='persist'
+# Establish connection on demand
+#ConnectionMode='demand'
+#IdleTimeout=300
+
+# Use default route provided by the peer (default: true)
+#DefaultRoute=true
+# Use DNS provided by the peer (default: true)
+#UsePeerDNS=false
+
+# Override default LCP parameters from /etc/ppp/options
+#LCPEchoInterval=15
+#LCPEchoFailure=10
+
+# PPPoE options - experts only
+#
+# PPPoE service name
+#PPPoEService=''
+# PPPoE access concentrator name
+#PPPoEAC=''
+# Attach to existing session (sessid:macaddr)
+#PPPoESession=''
+# Only connect to specified MAC address
+#PPPoEMAC=''
+# Enable IPv6 support
+#PPPoEIP6=yes
+</code></pre><p>如果不想用运营商DNS，则取消注释<code>UsePeerDNS=false</code>一行，然后另需设置DNS（使用netctl的hooks），后面也会讲到。</p>
+<p><strong>p.s.配置好后也需要netctl enable,请注意，下面不再提醒。</strong></p>
+<h5 id="配置LAN口"><a href="#配置LAN口" class="headerlink" title="配置LAN口"></a>配置LAN口</h5><p>因为我的路由器一共有4个有线网卡，WAN口用掉了一个，现在还剩下3个，所以全部把他们桥接成<code>br0</code>作为LAN口。</p>
+<p>创建配置文件<code>/etc/netctl/br0-profile</code>，内容如下</p>
+<pre><code>Description="LAN Bridge connection"
+Interface=br0
+Priority=2
+Connection=bridge
+BindsToInterfaces=(net1 net2 net3)
+IP='static'
+Address=('192.168.123.1/24')
+## Ignore (R)STP and immediately activate the bridge
+#SkipForwardingDelay=yes
+</code></pre><p>这里我们吧<code>net1</code> <code>net2</code> <code>net3</code>桥接在一起形成br0这个新的接口，并指定了使用静态ip：<code>192.168.123.1</code> 掩码是24, 也就是说LAN侧这个网络的ip范围是 <code>192.168.123.1-192.168.123.255</code></p>
+<h3 id="配置dnsmasq"><a href="#配置dnsmasq" class="headerlink" title="配置dnsmasq"></a>配置dnsmasq</h3><p>安装dnsmasq：<code>pacman -S dnsmasq</code>, 启用dnsmasq： <code>systemctl enable dnsmasq</code></p>
+<p>修改<code>/etc/dnsmasq.conf</code></p>
+<pre><code>no-poll
+server=202.141.162.123#5353
+interface=br0
+expand-hosts
+domain=ezpro.lan
+dhcp-range=192.168.123.2,192.168.123.255,255.255.255.0,12h
+dhcp-host=aa:bb:cc:dd:ee:ff,192.168.123.52
+conf-dir=/etc/dnsmasq.d/,*.conf
+</code></pre><ul>
+<li><code>no-poll</code>禁止dnsmasq阅读<code>/etc/resolv.conf</code>作为上游DNS，(后面我们把<code>/etc/resolv.conf</code>设置为<code>127.0.0.1</code>即路由器本机的dns通过本机53号端口即dnsmasq来查询)</li>
+<li><code>server</code>dnsmasq的上游dns,这里推荐使用中科大LUG的DNS，用非常规端口5353进行查询，防止运营商劫持</li>
+<li><code>interface</code>指向了我们的lan侧接口<code>br0</code></li>
+<li><code>expand-hosts</code>是给dns记录里面添加<code>/etc/hosts</code>里面的记录</li>
+<li><code>domain</code>是给lan侧设备加上lan侧域名，比如局域网内有一台计算机的hostname叫<code>computer1</code>，那么他的域名就是<code>computer1.ezpro.lan</code></li>
+<li><code>dhcp-range</code>指明了lan侧dhcp服务器发放的ip地址范围和有效期，这里是<code>192.168.123.2-192.168.123.255</code>，有效期是12小时</li>
+<li><code>dhcp-host</code>这里是指定给mac地址为<code>aa:bb:cc:dd:ee:ff</code>的设备分配一个指定的ip<code>192.168.123.52</code></li>
+<li><code>conf-dir</code> 是设置额外配置文件所在的路径，后面<code>archss</code>有用</li>
+</ul>
+<h3 id="开启SSH"><a href="#开启SSH" class="headerlink" title="开启SSH"></a>开启SSH</h3><p>安装openssh：<code>pacman -S openssh</code>，启用sshd服务：<code>systemctl enable sshd</code></p>
+<p>由于sshd默认不允许root登录，后面我们要使用AUR安装一些软件，也是需要一个普通用户，所以请建一个普通用户，并设置好密码，因为sshd默认也不允许空密码登录。</p>
+<p><strong>至此你可以退出chroot环境，重启进入装好的arch linux，将你电脑与路由器LAN侧网线连接，电脑将自动获取到IP, 通过ssh登录到路由器上， 这时候你电脑还没有网络，但路由器有网，因为接下来我们要配置网络转发，实现路由功能</strong></p>
+<h3 id="配置网络转发"><a href="#配置网络转发" class="headerlink" title="配置网络转发"></a>配置网络转发</h3><h4 id="开启内核转发功能"><a href="#开启内核转发功能" class="headerlink" title="开启内核转发功能"></a>开启内核转发功能</h4><p>创建<code>/etc/sysctl.d/30-ipforward.conf</code>，内容如下：</p>
+<pre><code>net.ipv4.ip_forward = 1
+net.ipv6.config.default.forwarding = 1
+net.ipv6.config.all.forwarding = 1
+</code></pre><p>重启生效</p>
+<h4 id="使用AUR（老Archer直接跳过）"><a href="#使用AUR（老Archer直接跳过）" class="headerlink" title="使用AUR（老Archer直接跳过）"></a>使用AUR（老Archer直接跳过）</h4><p>添加<span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLnR1bmEudHNpbmdodWEuZWR1LmNuL2hlbHAvYXJjaGxpbnV4Y24v" title="https://mirrors.tuna.tsinghua.edu.cn/help/archlinuxcn/">archlinuxcn<i class="fa fa-external-link"></i></span>源</p>
+<p>安装aurman：<code>pacman -S aurman</code></p>
+<h4 id="安装支持FULL-CONE-NAT的iptables"><a href="#安装支持FULL-CONE-NAT的iptables" class="headerlink" title="安装支持FULL-CONE-NAT的iptables"></a>安装支持FULL-CONE-NAT的iptables</h4><p>因为内核模块编译需要用到内核头文件，因此先安装<code>linux-headers</code></p>
+<p>然后直接从AUR安装iptables-fullcone-nat：<code>aurman -S iptables-fullcone-nat</code></p>
+<p>此项目来源自Chion82的<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0NoaW9uODIvbmV0ZmlsdGVyLWZ1bGwtY29uZS1uYXQ=" title="https://github.com/Chion82/netfilter-full-cone-nat">netfilter-full-cone-nat<i class="fa fa-external-link"></i></span></p>
+<h4 id="创建iptables规则"><a href="#创建iptables规则" class="headerlink" title="创建iptables规则"></a>创建iptables规则</h4><p>创建<code>/etc/iptables/dhcp.rules</code>,内容如下：</p>
+<pre><code>*nat
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING -o net0 -j FULLCONENAT
+-A PREROUTING -i net0 -j FULLCONENAT
+COMMIT
+
+
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -i br0 -o net0 -j ACCEPT
+COMMIT
+</code></pre><p>创建<code>/etc/iptables/pppoe.rules</code>,内容如下：</p>
+<pre><code>*nat
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING -o ppp0 -j FULLCONENAT
+-A PREROUTING -i ppp0 -j FULLCONENAT
+COMMIT
+
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -i br0 -o ppp0 -j ACCEPT
+COMMIT
+
+*mangle
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+-A FORWARD -o ppp0 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+COMMIT
+</code></pre><h4 id="创建net0的钩子"><a href="#创建net0的钩子" class="headerlink" title="创建net0的钩子"></a>创建net0的钩子</h4><p>创建脚本<code>/etc/netctl/interfaces/net0</code>，赋予可执行权限，内容如下：</p>
+<pre><code>#!/bin/sh
+
+if [ "$(netctl is-enabled net0-pppoe-profile)" = "enabled" ]; then
+    # Set Custom DNS
+    cat &lt;&lt; EOF &gt; /etc/resolv.conf
+# generated by $0
+nameserver 127.0.0.1
+EOF
+
+    # Start iptables for pppoe
+    iptables-restore /etc/iptables/pppoe.rules
+
+else
+    # Start dhcpiptables
+    iptables-restore /etc/iptables/dhcp.rules
+fi
+</code></pre><p><strong>p.s.这里针对了PPPoE进行设置自定义DNS服务器为127.0.0.1（即本地DNS，由dnsmasq提供），对应net0-pppoe-profile的UsePeerDNS=false选项</strong></p>
+<p>然后<code>netctl restart xxxx-profile</code>重启一下WAN口，会自动执行脚本 <code>/etc/netctl/interfaces/net0</code> 完成相应的iptables转发设置。</p>
+<p><strong>至此，LAN侧设备已经能访问Internet了，基本路由功能已经实现</strong></p>
+<h3 id="开启无线AP-可选"><a href="#开启无线AP-可选" class="headerlink" title="开启无线AP(可选)"></a>开启无线AP(可选)</h3><p>推荐使用QCA9880这卡，本文以QCA9880为例，但是别买成V1版，要买Openwrt-x86兼容的V2，当然其他卡应该也行，不过值得注意的是Intel的网卡都不能开5G的AP</p>
+<p><strong>当然hostapd这种方式开出来的AP效果和网卡以及网卡驱动还是有很大关系的，你也可以选择另外单独买一个无线路由器连到LAN侧作AP使用</strong></p>
+<h4 id="重新编译内核"><a href="#重新编译内核" class="headerlink" title="重新编译内核"></a>重新编译内核</h4><p>开启以下选项以支持更多频道（以<code>ath10k</code>为例）：</p>
+<pre><code>CONFIG_CFG80211_CERTIFICATION_ONUS=y
+CONFIG_ATH_REG_DYNAMIC_USER_REG_HINTS=y
+CONFIG_ATH_REG_DYNAMIC_USER_CERT_TESTING=y
+CONFIG_ATH10K_DFS_CERTIFIED=y
+</code></pre><p>重新编译一个基于arch官方内核的自定义内核，推荐的方式是<span class="exturl" data-url="aHR0cHM6Ly93aWtpLmFyY2hsaW51eC5vcmcvaW5kZXgucGhwL0tlcm5lbHMvQXJjaF9CdWlsZF9TeXN0ZW0=" title="https://wiki.archlinux.org/index.php/Kernels/Arch_Build_System">Arch Wiki/Kernels/Arch_Build_System<i class="fa fa-external-link"></i></span> 编译好后用<code>pacman -U linux-xxx.pkg.tar.xz</code>来安装你的自定义内核，并执行<code>grub2-mkconfig -o /boot/grub/grub.cfg</code>来更新引导菜单</p>
+<h4 id="配置hostapd"><a href="#配置hostapd" class="headerlink" title="配置hostapd"></a>配置hostapd</h4><p>安装hostapd和crda：<code>pacman -S hostapd crda</code></p>
+<p>创建<code>/etc/hostapd/hostapd.conf</code>，内容如下：</p>
+<pre><code>#### Interface configuration ####
+
+interface=wifi0
+bridge=br0
+driver=nl80211
+
+##### IEEE 802.11 related configuration #####
+
+ssid=iCanHearYouHavingSex
+hw_mode=a
+channel=0
+auth_algs=1
+country_code=CN
+ieee80211d=1
+ieee80211h=1
+
+##### IEEE 802.11n related configuration #####
+
+ieee80211n=1
+ht_capab=[HT40+][SMPS-STATIC][SHORT-GI-40][TX-STBC][RX-STBC1][DSSS_CK-40][LDPC][MAX-AMSDU-7935]
+
+##### IEEE 802.11ac related configuration #####
+
+ieee80211ac=1
+vht_capab=[MAX-MPDU-11454][RXLDPC][SHORT-GI-80][TX-STBC-2BY1][RX-STBC-1][MAX-A-MPDU-LEN-EXP7][TX-ANTENNA-PATTERN][RX-ANTENNA-PATTERN][BF-ANTENNA-3][SOUNDING-DIMENSION-3]
+vht_oper_chwidth=1
+
+
+##### WPA/IEEE 802.11i configuration #####
+
+wpa=2
+wpa_key_mgmt=WPA-PSK
+rsn_pairwise=CCMP
+wpa_passphrase=youCanGuess
+
+### WMM
+wmm_enabled=1
+uapsd_advertisement_enabled=1
+wmm_ac_bk_cwmin=4
+wmm_ac_bk_cwmax=10
+wmm_ac_bk_aifs=7
+wmm_ac_bk_txop_limit=0
+wmm_ac_bk_acm=0
+wmm_ac_be_aifs=3
+wmm_ac_be_cwmin=4
+wmm_ac_be_cwmax=10
+wmm_ac_be_txop_limit=0
+wmm_ac_be_acm=0
+wmm_ac_vi_aifs=2
+wmm_ac_vi_cwmin=3
+wmm_ac_vi_cwmax=4
+wmm_ac_vi_txop_limit=94
+wmm_ac_vi_acm=0
+wmm_ac_vo_aifs=2
+wmm_ac_vo_cwmin=2
+wmm_ac_vo_cwmax=3
+wmm_ac_vo_txop_limit=47
+wmm_ac_vo_acm=0
+
+### TX queue parameters
+tx_queue_data3_aifs=7
+tx_queue_data3_cwmin=15
+tx_queue_data3_cwmax=1023
+tx_queue_data3_burst=0
+tx_queue_data2_aifs=3
+tx_queue_data2_cwmin=15
+tx_queue_data2_cwmax=63
+tx_queue_data2_burst=0
+tx_queue_data1_aifs=1
+tx_queue_data1_cwmin=7
+tx_queue_data1_cwmax=15
+tx_queue_data1_burst=3.0
+tx_queue_data0_aifs=1
+tx_queue_data0_cwmin=3
+tx_queue_data0_cwmax=7
+tx_queue_data0_burst=1.5
+</code></pre><ul>
+<li><code>ssid</code>为wifi名称</li>
+<li><code>wpa_passphrase</code> 为wifi密码</li>
+</ul>
+<p>启用hostapd：<code>systemctl enable hostapd</code>，启动hostapd：<code>systemctl start hostapd</code></p>
+<p><strong>p.s.其他网卡请务必留意ht_capab、vht_capab，请通过iw list查看网卡支持的工作模式，填写支持的模式，否则无法启动，所有的选项可以通过hostapd官方完整配置文件/usr/share/doc/hostapd/hostapd.conf进行查看</strong></p>
+<h3 id="额外功能"><a href="#额外功能" class="headerlink" title="额外功能"></a>额外功能</h3><ul>
+<li>samba文件服务器参考<span class="exturl" data-url="aHR0cHM6Ly93aWtpLmFyY2hsaW51eC5vcmcvaW5kZXgucGhwL3NhbWJh" title="https://wiki.archlinux.org/index.php/samba">Arch Wiki/samba<i class="fa fa-external-link"></i></span></li>
+<li>archss透明代理，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vbmxvci9BcmNoLVJvdXRlci1TUw==" title="https://github.com/monlor/Arch-Router-SS">Arch-Router-SS<i class="fa fa-external-link"></i></span></li>
+<li>其他路由设置，参考<span class="exturl" data-url="aHR0cHM6Ly93aWtpLmFyY2hsaW51eC5vcmcvaW5kZXgucGhwL3JvdXRlcg==" title="https://wiki.archlinux.org/index.php/router">Arch Wiki/router<i class="fa fa-external-link"></i></span> <strong>p.s.如果使用iptables-fullcone-nat将不再需要UPnP</strong></li>
+<li>其他额外功能，还是参考<span class="exturl" data-url="aHR0cHM6Ly93aWtpLmFyY2hsaW51eC5vcmcv" title="https://wiki.archlinux.org/">Arch Wiki<i class="fa fa-external-link"></i></span></li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>比起虚拟机开那么多吃爆内存来说，Arch Router只占用了不到270Mb内存，处理器也工作在十分空闲的状态，而且Linux本身就能搭建各种服务器，总的来说可玩性要比虚拟机更高，而且折腾了这一路，也弄清楚了路由器工作的原理，学到很多东西。 还是那句话：</p>
+<blockquote>
+<p>当你成功安装Arch Linux的那一刻，你就已经成为教徒。</p>
+</blockquote>
+<blockquote>
+<p><strong>本文转自<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmVkd2FyZC1wLnh5ei8=" title="https://blog.edward-p.xyz/">Edward-P’s Blog<i class="fa fa-external-link"></i></span>的<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmVkd2FyZC1wLnh5ei8yMDE4LzA4L2FyY2gtcm91dGVyLw==" title="https://blog.edward-p.xyz/2018/08/arch-router/">DIY你自己的 Arch Linux 软路由<i class="fa fa-external-link"></i></span></strong></p>
+</blockquote>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>请喝咖啡～</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat.png" alt="monlor 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="monlor 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>edward-p
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.monlor.com/posts/41757.html" title="[转载]DIY你自己的 Arch Linux 软路由">https://www.monlor.com/posts/41757.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/arch/" rel="tag"># arch</a>
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/router/" rel="tag"># router</a>
+              <a href="/tags/iptables/" rel="tag"># iptables</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/9565.html" rel="prev" title="CentOS 7下Oracle 12c数据库安装教程">
+      <i class="fa fa-chevron-left"></i> CentOS 7下Oracle 12c数据库安装教程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/54973.html" rel="next" title="小米路由器MIXBOX工具箱公测版本发布，支持小米路由器全型号">
+      小米路由器MIXBOX工具箱公测版本发布，支持小米路由器全型号 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#提示"><span class="nav-number">1.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Arch-Linux到你的软路由"><span class="nav-number">2.</span> <span class="nav-text">安装Arch Linux到你的软路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置网卡"><span class="nav-number">3.</span> <span class="nav-text">配置网卡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置udev规则，对网卡进行重命名"><span class="nav-number">3.1.</span> <span class="nav-text">配置udev规则，对网卡进行重命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置netctl"><span class="nav-number">3.2.</span> <span class="nav-text">配置netctl</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#配置WAN口"><span class="nav-number">3.2.1.</span> <span class="nav-text">配置WAN口</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置LAN口"><span class="nav-number">3.2.2.</span> <span class="nav-text">配置LAN口</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置dnsmasq"><span class="nav-number">4.</span> <span class="nav-text">配置dnsmasq</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启SSH"><span class="nav-number">5.</span> <span class="nav-text">开启SSH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置网络转发"><span class="nav-number">6.</span> <span class="nav-text">配置网络转发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开启内核转发功能"><span class="nav-number">6.1.</span> <span class="nav-text">开启内核转发功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用AUR（老Archer直接跳过）"><span class="nav-number">6.2.</span> <span class="nav-text">使用AUR（老Archer直接跳过）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装支持FULL-CONE-NAT的iptables"><span class="nav-number">6.3.</span> <span class="nav-text">安装支持FULL-CONE-NAT的iptables</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建iptables规则"><span class="nav-number">6.4.</span> <span class="nav-text">创建iptables规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建net0的钩子"><span class="nav-number">6.5.</span> <span class="nav-text">创建net0的钩子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启无线AP-可选"><span class="nav-number">7.</span> <span class="nav-text">开启无线AP(可选)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#重新编译内核"><span class="nav-number">7.1.</span> <span class="nav-text">重新编译内核</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置hostapd"><span class="nav-number">7.2.</span> <span class="nav-text">配置hostapd</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#额外功能"><span class="nav-number">8.</span> <span class="nav-text">额外功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="monlor"
+      src="/images/favicon-64x64-monlor.ico">
+  <p class="site-author-name" itemprop="name">monlor</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vbmxvcg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;monlor"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOm1vbmxvckBxcS5jb20=" title="E-Mail → mailto:monlor@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cDovL3dwYS5xcS5jb20vbXNncmQ/dj0zJnVpbj00MjE1OTk3NTYmc2l0ZT1xcSZtZW51PXllcw==" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;421599756&amp;site&#x3D;qq&amp;menu&#x3D;yes"><i class="fa fa-fw fa-qq"></i>QQ</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90Lm1lL21vbmxvcg==" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;monlor"><i class="fa fa-fw fa-telegram"></i>Telegram</span>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="//blog.edward-p.xyz" target="_blank" rel="noopener" title="&#x2F;&#x2F;blog.edward-p.xyz">Edward-P's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="//www.gaoyuan.ink" target="_blank" rel="noopener" title="&#x2F;&#x2F;www.gaoyuan.ink">GaoYuan's Blog</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">monlor</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://www.monlor.com/posts/41757.html',]
+      });
+      });
+  </script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '04afe0689bc9fd7491ce',
+      clientSecret: '0f90e3f80eea78023f2cd0da720577a40c405553',
+      repo        : 'monlor.github.io',
+      owner       : 'monlor',
+      admin       : ['monlor'],
+      id          : '88852f0f2667180501cf1cb5c7812015',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
